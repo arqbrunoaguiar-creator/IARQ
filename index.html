@@ -27,7 +27,7 @@ body{font-family:-apple-system,'SF Pro Display',system-ui,sans-serif;background:
 /* SIDEBAR */
 .sidebar{width:240px;flex-shrink:0;background:rgba(0,0,0,.85);backdrop-filter:blur(40px);-webkit-backdrop-filter:blur(40px);border-right:.5px solid var(--br);display:flex;flex-direction:column;position:fixed;top:0;left:0;bottom:0;z-index:200;transition:transform .3s ease}
 .sb-logo{padding:22px 18px 14px;border-bottom:.5px solid var(--br);display:flex;align-items:center;gap:10px}
-.sb-mark{width:32px;height:32px;background:linear-gradient(135deg,var(--blue),var(--blue2));border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;letter-spacing:1px;flex-shrink:0}
+.sb-mark{width:32px;height:32px;background:linear-gradient(135deg,#3d2b1f,#1a1714);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;letter-spacing:1px;flex-shrink:0}
 .sb-text{font-size:17px;font-weight:700;letter-spacing:2px}
 
 .plan-pill{margin:10px 14px;padding:8px 12px;background:var(--w04);border:.5px solid var(--br);border-radius:var(--r2);display:flex;align-items:center;justify-content:space-between}
@@ -324,156 +324,146 @@ body{font-family:-apple-system,'SF Pro Display',system-ui,sans-serif;background:
 <!-- SIDEBAR -->
 <!-- ══ AUTH OVERLAY ══ -->
 <!-- ══ AUTH OVERLAY — Apple Glass ══ -->
-<div id="auth-overlay" style="position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',sans-serif;overflow:hidden;background:#000">
+<!-- ══ AUTH OVERLAY — Apple Premium Glass ══ -->
+<!-- ══ AUTH OVERLAY — Apple Premium ══ -->
+<div id="auth-overlay" style="position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Helvetica Neue',sans-serif;overflow:hidden;background:#000">
 
-  <!-- Deep background -->
   <canvas id="auth-canvas" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none"></canvas>
 
-  <!-- Fine grain texture -->
-  <svg id="auth-grain" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:.28" xmlns="http://www.w3.org/2000/svg">
-    <filter id="grain-f"><feTurbulence type="fractalNoise" baseFrequency="0.72" numOctaves="4" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
-    <rect width="100%" height="100%" filter="url(#grain-f)" opacity=".18"/>
-  </svg>
+  <!-- Gloss overlay top -->
+  <div style="position:absolute;top:0;left:0;right:0;height:55%;background:linear-gradient(to bottom,rgba(255,255,255,.03) 0%,transparent 100%);pointer-events:none"></div>
 
-  <!-- Subtle top vignette -->
-  <div style="position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% -10%,rgba(160,160,180,.04) 0%,transparent 70%);pointer-events:none"></div>
-  <!-- Bottom fade -->
-  <div style="position:absolute;bottom:0;left:0;right:0;height:40%;background:linear-gradient(to top,rgba(0,0,0,.4),transparent);pointer-events:none"></div>
+  <!-- AUTH STYLES -->
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600;700&display=swap');
+    #auth-card *{ font-family:'Josefin Sans',system-ui,-apple-system,sans-serif;letter-spacing:.3px; }
+    .auth-inp{
+      width:100%;
+      background:rgba(61,43,31,.04);
+      border:1px solid rgba(61,43,31,.12);
+      border-radius:4px;padding:14px 16px;
+      font-size:14px;color:rgba(26,23,20,.85);outline:none;
+      box-sizing:border-box;
+      transition:all .2s ease;
+      -webkit-font-smoothing:antialiased;
+      letter-spacing:.3px;
+    }
+    .auth-inp::placeholder{color:rgba(61,43,31,.3);}
+    .auth-inp:focus{
+      border-color:rgba(42,143,255,.45);
+      background:rgba(42,143,255,.02);
+      box-shadow:0 0 0 3px rgba(42,143,255,.08);
+    }
+    .auth-lbl{
+      display:block;font-size:10px;font-weight:600;
+      letter-spacing:1.5px;text-transform:uppercase;
+      color:rgba(61,43,31,.45);margin-bottom:7px;
+    }
+    .auth-field{margin-bottom:13px;}
+    .auth-btn-primary{
+      width:100%;
+      background:#3d2b1f;color:#d4c4b0;border:none;
+      border-radius:4px;padding:15px;
+      font-size:12px;font-weight:700;
+      cursor:pointer;letter-spacing:2px;text-transform:uppercase;
+      transition:all .18s ease;
+      -webkit-font-smoothing:antialiased;
+    }
+    .auth-btn-primary:hover{background:#2a1a10;}
+    .auth-btn-primary:active{transform:scale(.985);}
+    .auth-btn-primary:disabled{opacity:.35;cursor:not-allowed;}
+    .auth-btn-secondary{
+      width:100%;
+      background:rgba(61,43,31,.05);color:rgba(61,43,31,.7);
+      border:1px solid rgba(61,43,31,.12);
+      border-radius:4px;padding:14px;
+      font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;
+      cursor:pointer;
+      transition:all .18s ease;
+    }
+    .auth-btn-secondary:hover{background:rgba(61,43,31,.09);}
+    .auth-btn-secondary:active{transform:scale(.985);}
+    @keyframes authCardIn{
+      from{opacity:0;transform:translateY(32px) scale(.97);filter:blur(8px);}
+      to{opacity:1;transform:none;filter:blur(0);}
+    }
+    @keyframes authLogoIn{
+      from{opacity:0;transform:scale(.88);}
+      to{opacity:1;transform:scale(1);}
+    }
+  </style>
 
-  <!-- Card -->
+  <!-- CARD — white gloss Apple style -->
   <div id="auth-card" style="
-    position:relative;z-index:2;width:100%;max-width:390px;
-    background:rgba(13,13,15,.78);
-    border-top:.5px solid rgba(255,255,255,.09);
-    border-left:.5px solid rgba(255,255,255,.06);
-    border-right:.5px solid rgba(255,255,255,.04);
-    border-bottom:.5px solid rgba(255,255,255,.03);
-    border-radius:28px;
-    padding:38px 34px 30px;
-    backdrop-filter:blur(60px) saturate(140%) brightness(1.04);
-    -webkit-backdrop-filter:blur(60px) saturate(140%) brightness(1.04);
+    position:relative;z-index:2;width:100%;max-width:375px;
+    background:rgba(250,248,245,.94);
+    border-radius:4px;
+    padding:40px 30px 30px;
+    backdrop-filter:blur(40px) saturate(180%);
+    -webkit-backdrop-filter:blur(40px) saturate(180%);
+    border:1px solid rgba(255,255,255,.85);
     box-shadow:
-      0 0 0 .5px rgba(255,255,255,.03) inset,
-      0 1px 0 rgba(255,255,255,.07) inset,
-      0 40px 100px rgba(0,0,0,.8),
-      0 0 80px rgba(120,120,140,.03);
-    animation:authCardIn .7s cubic-bezier(.16,1,.3,1) both">
+      0 0 0 .5px rgba(61,43,31,.06),
+      0 2px 0 rgba(255,255,255,.7) inset,
+      0 -1px 0 rgba(61,43,31,.04) inset,
+      0 30px 80px rgba(0,0,0,.4),
+      0 8px 32px rgba(0,0,0,.2);
+    animation:authCardIn .75s cubic-bezier(.16,1,.3,1) both">
 
-    <!-- Logo mark -->
-    <div style="text-align:center;margin-bottom:30px">
-      <!-- Wordmark with subtle glow -->
-      <div style="display:inline-block;position:relative;margin-bottom:10px">
-        <div style="font-size:30px;font-weight:800;letter-spacing:-1.5px;color:#fff;line-height:1;-webkit-font-smoothing:antialiased">IARQ</div>
-        <div style="position:absolute;inset:0;font-size:30px;font-weight:800;letter-spacing:-1.5px;color:rgba(200,200,220,.15);filter:blur(8px);line-height:1;pointer-events:none">IARQ</div>
+    <!-- Gloss shine on card top -->
+    <div style="position:absolute;top:0;left:0;right:0;height:50%;border-radius:4px 4px 60% 60% / 4px 4px 40px 40px;background:linear-gradient(to bottom,rgba(255,255,255,.4) 0%,rgba(255,255,255,0) 100%);pointer-events:none"></div>
+
+    <!-- LOGO -->
+    <div style="text-align:center;margin-bottom:28px;animation:authLogoIn .6s cubic-bezier(.16,1,.3,1) .1s both">
+
+      <!-- IARQ Logotype -->
+      <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;300&display=swap" rel="stylesheet">
+      <div style="margin-bottom:8px">
+        <div style="font-family:'Raleway',sans-serif;font-weight:200;font-size:38px;letter-spacing:.28em;color:#1a1714;line-height:1;-webkit-font-smoothing:antialiased;">IARQ</div>
       </div>
-      <!-- Thin separator line -->
-      <div style="width:28px;height:.5px;background:linear-gradient(to right,transparent,rgba(255,255,255,.2),transparent);margin:0 auto 10px"></div>
-      <div style="font-size:11px;color:rgba(255,255,255,.22);font-weight:400;letter-spacing:2px;text-transform:uppercase">Plataforma para Arquitetos</div>
+      <div style="width:32px;height:.5px;background:rgba(61,43,31,.2);margin:10px auto 10px;"></div>
+      <div style="font-family:'Josefin Sans',sans-serif;font-size:9px;color:rgba(61,43,31,.4);font-weight:400;letter-spacing:3px;text-transform:uppercase">Plataforma para Arquitetos</div>
     </div>
 
-    <!-- Mode switcher (pill) -->
-    <div id="auth-switcher" style="display:flex;background:rgba(255,255,255,.04);border:.5px solid rgba(255,255,255,.07);border-radius:11px;padding:3px;margin-bottom:24px;gap:2px">
+    <!-- Tab switcher -->
+    <div id="auth-switcher" style="display:flex;background:rgba(61,43,31,.06);border-radius:4px;padding:3px;margin-bottom:22px;gap:2px">
       <button id="auth-tab-login" onclick="authSwitchTab('login')"
-        style="flex:1;padding:9px 0;font-size:13px;font-weight:500;border:none;border-radius:8px;cursor:pointer;font-family:inherit;transition:all .3s cubic-bezier(.16,1,.3,1);background:rgba(255,255,255,.09);color:rgba(255,255,255,.9);letter-spacing:.1px;-webkit-font-smoothing:antialiased">
+        style="flex:1;padding:9px 0;font-size:11px;font-weight:700;border:none;border-radius:2px;cursor:pointer;transition:all .25s cubic-bezier(.16,1,.3,1);background:#faf8f5;color:#1a1714;box-shadow:0 1px 4px rgba(61,43,31,.1);letter-spacing:1.5px;text-transform:uppercase;font-family:'Josefin Sans',sans-serif;">
         Entrar
       </button>
       <button id="auth-tab-signup" onclick="authSwitchTab('signup')"
-        style="flex:1;padding:9px 0;font-size:13px;font-weight:400;border:none;border-radius:8px;cursor:pointer;font-family:inherit;transition:all .3s cubic-bezier(.16,1,.3,1);background:transparent;color:rgba(255,255,255,.28);letter-spacing:.1px;-webkit-font-smoothing:antialiased">
+        style="flex:1;padding:9px 0;font-size:11px;font-weight:600;border:none;border-radius:2px;cursor:pointer;transition:all .25s cubic-bezier(.16,1,.3,1);background:transparent;color:rgba(61,43,31,.4);letter-spacing:1.5px;text-transform:uppercase;font-family:'Josefin Sans',sans-serif;">
         Criar conta
       </button>
     </div>
 
-    <!-- INPUT STYLE tag (scoped) -->
-    <style>
-      .auth-inp {
-        width:100%;
-        background:rgba(255,255,255,.045);
-        border:.5px solid rgba(255,255,255,.09);
-        border-radius:13px;
-        padding:14px 16px;
-        font-size:15px;
-        color:rgba(255,255,255,.92);
-        outline:none;
-        font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text',sans-serif;
-        box-sizing:border-box;
-        transition:border-color .25s ease,background .25s ease,box-shadow .25s ease;
-        -webkit-font-smoothing:antialiased;
-        letter-spacing:-.1px;
-      }
-      .auth-inp::placeholder{ color:rgba(255,255,255,.18); }
-      .auth-inp:focus{
-        border-color:rgba(180,180,200,.22);
-        background:rgba(255,255,255,.06);
-        box-shadow:0 0 0 3px rgba(255,255,255,.04);
-      }
-      .auth-lbl{
-        display:block;
-        font-size:10.5px;
-        font-weight:500;
-        letter-spacing:.8px;
-        text-transform:uppercase;
-        color:rgba(255,255,255,.28);
-        margin-bottom:7px;
-      }
-      .auth-field{ margin-bottom:14px }
-      .auth-btn-primary{
-        width:100%;
-        background:rgba(255,255,255,.92);
-        color:#0a0a0c;
-        border:none;
-        border-radius:13px;
-        padding:14px;
-        font-size:15px;
-        font-weight:600;
-        cursor:pointer;
-        font-family:inherit;
-        letter-spacing:-.2px;
-        transition:background .2s ease, transform .12s ease, box-shadow .2s ease;
-        -webkit-font-smoothing:antialiased;
-        box-shadow:0 2px 20px rgba(255,255,255,.08);
-      }
-      .auth-btn-primary:hover{
-        background:#fff;
-        box-shadow:0 4px 28px rgba(255,255,255,.14);
-      }
-      .auth-btn-primary:active{ transform:scale(.985); }
-      .auth-btn-primary:disabled{ opacity:.35; cursor:not-allowed; }
-      .auth-btn-primary.green-grad{
-        background:linear-gradient(135deg,rgba(255,255,255,.9),rgba(200,255,220,.9));
-        color:#0a0a0c;
-      }
-      @keyframes authCardIn{
-        from{ opacity:0; transform:translateY(20px) scale(.98); filter:blur(4px); }
-        to{   opacity:1; transform:translateY(0)    scale(1);   filter:blur(0);   }
-      }
-    </style>
-
     <!-- LOGIN FORM -->
-    <div id="auth-login-form" style="transition:opacity .28s ease,transform .28s ease">
+    <div id="auth-login-form" style="transition:opacity .25s ease,transform .25s ease">
       <div class="auth-field">
         <label class="auth-lbl">E-mail</label>
         <input id="auth-login-email" type="email" class="auth-inp" placeholder="seu@email.com"
           onkeydown="if(event.key==='Enter')document.getElementById('auth-login-pass').focus()">
       </div>
-      <div class="auth-field" style="position:relative;margin-bottom:20px">
+      <div class="auth-field" style="margin-bottom:20px">
         <label class="auth-lbl" style="display:flex;justify-content:space-between;align-items:center">
           <span>Senha</span>
-          <button onclick="authForgot()" style="font-size:11px;color:rgba(10,132,255,.8);background:none;border:none;cursor:pointer;padding:0;font-family:inherit;font-weight:500;letter-spacing:0">Esqueci</button>
+          <button onclick="authForgot()" style="font-size:10px;color:rgba(42,143,255,.7);background:none;border:none;cursor:pointer;padding:0;font-weight:600;letter-spacing:.8px;transition:color .15s" onmouseover="this.style.color='rgba(42,143,255,1)'" onmouseout="this.style.color='rgba(42,143,255,.7)'">Esqueci</button>
         </label>
         <input id="auth-login-pass" type="password" class="auth-inp" placeholder="••••••••"
           onkeydown="if(event.key==='Enter')authLogin()">
       </div>
-      <button onclick="authLogin()" id="auth-login-btn" class="auth-btn-primary">Entrar</button>
-      <div style="text-align:center;margin-top:16px;font-size:13px;color:rgba(255,255,255,.3);font-weight:400">
-        Não tem conta? <button onclick="authSwitchTab('signup')" style="color:rgba(10,132,255,.85);background:none;border:none;cursor:pointer;font-family:inherit;font-size:13px;font-weight:500;padding:0">Criar agora</button>
+      <button onclick="authLogin()" id="auth-login-btn" class="auth-btn-primary">Continuar</button>
+      <div style="text-align:center;margin-top:14px;font-size:13px;color:rgba(0,0,0,.35)">
+        Não tem conta?
+        <button onclick="authSwitchTab('signup')" style="color:rgba(42,143,255,.8);background:none;border:none;cursor:pointer;font-size:12px;font-weight:600;padding:0;margin-left:3px;letter-spacing:.5px">Criar agora</button>
       </div>
     </div>
 
     <!-- SIGNUP FORM -->
-    <div id="auth-signup-form" style="display:none;transition:opacity .28s ease,transform .28s ease">
+    <div id="auth-signup-form" style="display:none;transition:opacity .25s ease,transform .25s ease">
       <div class="auth-field">
-        <label class="auth-lbl">Nome completo</label>
-        <input id="auth-signup-name" type="text" class="auth-inp" placeholder="Seu nome">
+        <label class="auth-lbl">Nome</label>
+        <input id="auth-signup-name" type="text" class="auth-inp" placeholder="Seu nome completo">
       </div>
       <div class="auth-field">
         <label class="auth-lbl">E-mail</label>
@@ -484,27 +474,22 @@ body{font-family:-apple-system,'SF Pro Display',system-ui,sans-serif;background:
         <input id="auth-signup-pass" type="password" class="auth-inp" placeholder="Mínimo 6 caracteres"
           onkeydown="if(event.key==='Enter')authSignup()">
       </div>
-      <button onclick="authSignup()" id="auth-signup-btn" class="auth-btn-primary green-grad">
-        Criar conta grátis
-      </button>
-      <div style="text-align:center;margin-top:14px;font-size:12px;color:rgba(255,255,255,.22);line-height:1.6">
-        Já comprou o Pro?<br>Crie com o e-mail usado na compra — acesso liberado automaticamente.
+      <button onclick="authSignup()" id="auth-signup-btn" class="auth-btn-primary">Criar conta grátis</button>
+      <div style="text-align:center;margin-top:10px;font-size:11.5px;color:rgba(0,0,0,.3);line-height:1.6">
+        Já comprou? Use o e-mail da compra — Pro ativo automaticamente.
       </div>
-      <div style="text-align:center;margin-top:12px;font-size:13px;color:rgba(255,255,255,.3)">
-        Já tem conta? <button onclick="authSwitchTab('login')" style="color:rgba(10,132,255,.85);background:none;border:none;cursor:pointer;font-family:inherit;font-size:13px;font-weight:500;padding:0">Entrar</button>
+      <div style="text-align:center;margin-top:10px;font-size:13px;color:rgba(0,0,0,.35)">
+        Já tem conta?
+        <button onclick="authSwitchTab('login')" style="color:rgba(42,143,255,.8);background:none;border:none;cursor:pointer;font-size:12px;font-weight:600;padding:0;margin-left:3px;letter-spacing:.5px">Entrar</button>
       </div>
     </div>
 
     <!-- STATUS MSG -->
-    <div id="auth-msg" style="display:none;margin-top:14px;padding:11px 14px;border-radius:10px;font-size:13px;font-weight:400;text-align:center;letter-spacing:-.1px"></div>
+    <div id="auth-msg" style="display:none;margin-top:12px;padding:11px 14px;border-radius:10px;font-size:13px;text-align:center"></div>
 
-    <!-- Bottom trust signals -->
-    <div style="display:flex;align-items:center;justify-content:center;gap:18px;margin-top:22px;padding-top:18px;border-top:.5px solid rgba(255,255,255,.05)">
-      <div style="font-size:10.5px;color:rgba(255,255,255,.18);letter-spacing:.3px">🔒 SSL</div>
-      <div style="width:1px;height:10px;background:rgba(255,255,255,.08)"></div>
-      <div style="font-size:10.5px;color:rgba(255,255,255,.18);letter-spacing:.3px">🇧🇷 Brasil</div>
-      <div style="width:1px;height:10px;background:rgba(255,255,255,.08)"></div>
-      <div style="font-size:10.5px;color:rgba(255,255,255,.18);letter-spacing:.3px">✦ 200+ arquitetos</div>
+    <!-- Footer -->
+    <div style="text-align:center;margin-top:20px;padding-top:16px;border-top:1px solid rgba(0,0,0,.06)">
+      <span style="font-size:9px;color:rgba(61,43,31,.3);letter-spacing:1.5px;text-transform:uppercase">🔒 Seguro · 🇧🇷 Brasil · ✦ IA para Arquitetos</span>
     </div>
   </div>
 </div>
@@ -5398,84 +5383,69 @@ function orcGenApresentacao(mode){
 // AUTH CANVAS — glass orbs animation (Apple-style)
 // ============================================================
 function initAuthCanvas(){
-  var cv = document.getElementById('auth-canvas'); if(!cv) return;
+  var cv = document.getElementById('auth-canvas');
+  if(!cv) return;
   var ctx = cv.getContext('2d');
   var W, H;
+  function resize(){ W=cv.width=window.innerWidth; H=cv.height=window.innerHeight; }
+  resize(); window.addEventListener('resize', resize);
 
-  function resize(){
-    W = cv.width  = window.innerWidth;
-    H = cv.height = window.innerHeight;
-  }
-  resize();
-  window.addEventListener('resize', resize);
-
-  // ── Palette: monochromatic blacks + a single muted blue + warm grey ──
-  // Everything is very dark, very subtle — moves like breathing
+  // Aurora colors — deep rich gradients like Apple wallpapers
+  // Each orb: [baseX, baseY, radius, r, g, b, alpha, px, py, sx, sy]
   var ORBS = [
-    // x%  y%   radius%  r    g    b    maxA   phaseX  phaseY  speedX  speedY
-    [ .18, .22,  .55,    80,  82,  95,  .055,  0.00,   1.00,   .00008, .00006 ],  // cool grey-blue, top-left
-    [ .78, .18,  .48,    70,  72,  88,  .045,  2.10,   0.40,   .00007, .00009 ],  // grey-indigo, top-right
-    [ .55, .80,  .52,    55,  57,  72,  .038,  4.20,   2.80,   .00009, .00007 ],  // dark slate, bottom
-    [ .25, .68,  .38,    90,  90, 105,  .032,  1.50,   3.60,   .00006, .00008 ],  // warm grey, bottom-left
-    [ .50, .42,  .30,   100, 100, 120,  .025,  3.30,   1.20,   .00010, .00006 ],  // centre, faint silver
-    [ .88, .60,  .34,    60,  65,  90,  .030,  0.80,   4.10,   .00007, .00010 ],  // right-mid
+    [.15, .25, .65,  88, 100, 220,  .22,  0.0, 1.2,  .000035, .000028],  // deep violet-blue
+    [.75, .15, .58, 160,  80, 240,  .18,  2.3, 0.6,  .000028, .000040],  // purple
+    [.55, .78, .62,  40, 120, 200,  .20,  4.5, 3.1,  .000040, .000032],  // ocean blue
+    [.20, .72, .45, 120,  60, 180,  .15,  1.8, 4.2,  .000025, .000035],  // indigo
+    [.85, .60, .38,  60,  80, 255,  .14,  3.6, 1.8,  .000045, .000025],  // electric blue
+    [.42, .35, .52, 200, 100, 255,  .12,  0.9, 2.5,  .000030, .000042],  // lavender
   ];
 
-  // Pre-compute initial phases so animation starts mid-cycle (no jump)
-  var start = performance.now();
-
-  function ease(t){ return t; } // linear — smoothness comes from very slow speed
+  var t0 = performance.now();
 
   function draw(){
     var now = performance.now();
-    var elapsed = now - start;
+    var el  = now - t0;
 
-    // Base: pure black
-    ctx.fillStyle = '#050507';
+    // Very dark base
+    ctx.fillStyle = '#03040a';
     ctx.fillRect(0, 0, W, H);
 
-    // Draw each orb with multiply-like layering via globalCompositeOperation
     ctx.globalCompositeOperation = 'screen';
 
     ORBS.forEach(function(o){
-      var bx = o[0], by = o[1], br = o[2];
-      var r = o[3], g = o[4], b = o[5], maxA = o[6];
-      var px = o[7], py = o[8], sx = o[9], sy = o[10];
+      var x = (o[0] + Math.sin(el * o[9] + o[7]) * .10) * W;
+      var y = (o[1] + Math.cos(el * o[10] + o[8]) * .09) * H;
+      var r = (o[2] + Math.sin(el * o[9] * .6 + o[8]) * .04) * Math.min(W, H);
+      var a = o[6];
 
-      // Slow sinusoidal drift — amplitude very small (6-8% of screen)
-      var x = (bx + Math.sin(elapsed * sx + px) * .07) * W;
-      var y = (by + Math.cos(elapsed * sy + py) * .06) * H;
-
-      // Radius breathes very gently (±4%)
-      var rad = (br + Math.sin(elapsed * sx * .7 + px) * .04) * Math.min(W, H);
-
-      // Radial gradient — core fades to nothing over large distance
-      var grad = ctx.createRadialGradient(x, y, 0, x, y, rad);
-      grad.addColorStop(0,   'rgba('+r+','+g+','+b+','+maxA+')');
-      grad.addColorStop(.35, 'rgba('+r+','+g+','+b+','+(maxA*.5)+')');
-      grad.addColorStop(.7,  'rgba('+r+','+g+','+b+','+(maxA*.15)+')');
-      grad.addColorStop(1,   'rgba('+r+','+g+','+b+',0)');
+      var gr = ctx.createRadialGradient(x, y, 0, x, y, r);
+      gr.addColorStop(0,   'rgba('+o[3]+','+o[4]+','+o[5]+','+a+')');
+      gr.addColorStop(.3,  'rgba('+o[3]+','+o[4]+','+o[5]+','+(a*.6)+')');
+      gr.addColorStop(.65, 'rgba('+o[3]+','+o[4]+','+o[5]+','+(a*.2)+')');
+      gr.addColorStop(1,   'rgba('+o[3]+','+o[4]+','+o[5]+',0)');
 
       ctx.beginPath();
-      ctx.arc(x, y, rad, 0, Math.PI * 2);
-      ctx.fillStyle = grad;
+      ctx.arc(x, y, r, 0, Math.PI * 2);
+      ctx.fillStyle = gr;
       ctx.fill();
     });
 
     ctx.globalCompositeOperation = 'source-over';
 
-    // Subtle horizontal scan-line vignette from bottom
-    var vg = ctx.createLinearGradient(0, H * .55, 0, H);
-    vg.addColorStop(0, 'rgba(0,0,0,0)');
-    vg.addColorStop(1, 'rgba(0,0,0,.55)');
+    // Heavy vignette — keeps edges very dark, focus center
+    var vg = ctx.createRadialGradient(W*.5, H*.5, Math.min(W,H)*.2, W*.5, H*.5, Math.max(W,H)*.9);
+    vg.addColorStop(0,   'rgba(0,0,0,0)');
+    vg.addColorStop(.5,  'rgba(0,0,0,.25)');
+    vg.addColorStop(1,   'rgba(0,0,0,.82)');
     ctx.fillStyle = vg;
     ctx.fillRect(0, 0, W, H);
 
-    // Edge vignette (radial from centre)
-    var eg = ctx.createRadialGradient(W*.5, H*.5, Math.min(W,H)*.3, W*.5, H*.5, Math.max(W,H)*.85);
-    eg.addColorStop(0, 'rgba(0,0,0,0)');
-    eg.addColorStop(1, 'rgba(0,0,0,.65)');
-    ctx.fillStyle = eg;
+    // Bottom darkening
+    var bg = ctx.createLinearGradient(0, H*.5, 0, H);
+    bg.addColorStop(0, 'rgba(0,0,0,0)');
+    bg.addColorStop(1, 'rgba(0,0,0,.5)');
+    ctx.fillStyle = bg;
     ctx.fillRect(0, 0, W, H);
 
     requestAnimationFrame(draw);
@@ -5489,29 +5459,29 @@ function authSwitchTab(tab){
   var isLogin = tab==='login';
   var lf = document.getElementById('auth-login-form');
   var sf = document.getElementById('auth-signup-form');
-  // Fade transition
   var hide = isLogin ? sf : lf;
   var show = isLogin ? lf : sf;
-  hide.style.opacity='0'; hide.style.transform='translateY(6px)';
+  hide.style.opacity='0'; hide.style.transform='translateY(8px)';
+  hide.style.transition='opacity .18s ease,transform .18s ease';
   setTimeout(function(){
     hide.style.display='none';
     show.style.display='block';
-    show.style.opacity='0'; show.style.transform='translateY(6px)';
-    show.style.transition='opacity .28s ease,transform .28s ease';
+    show.style.opacity='0'; show.style.transform='translateY(8px)';
+    show.style.transition='opacity .28s ease,transform .28s cubic-bezier(.16,1,.3,1)';
     requestAnimationFrame(function(){
       show.style.opacity='1'; show.style.transform='translateY(0)';
     });
-  }, 160);
-  hide.style.transition='opacity .16s ease,transform .16s ease';
-
+  }, 180);
   var tl=document.getElementById('auth-tab-login');
   var ts=document.getElementById('auth-tab-signup');
-  tl.style.background = isLogin?'rgba(255,255,255,.09)':'transparent';
-  tl.style.color      = isLogin?'rgba(255,255,255,.9)':'rgba(255,255,255,.28)';
-  tl.style.fontWeight = isLogin?'500':'400';
-  ts.style.background = isLogin?'transparent':'rgba(255,255,255,.09)';
-  ts.style.color      = isLogin?'rgba(255,255,255,.28)':'rgba(255,255,255,.9)';
-  ts.style.fontWeight = isLogin?'400':'500';
+  tl.style.background   = isLogin?'#fff':'transparent';
+  tl.style.color        = isLogin?'#000':'rgba(0,0,0,.4)';
+  tl.style.fontWeight   = isLogin?'600':'500';
+  tl.style.boxShadow    = isLogin?'0 1px 4px rgba(0,0,0,.12)':'none';
+  ts.style.background   = isLogin?'transparent':'#fff';
+  ts.style.color        = isLogin?'rgba(0,0,0,.4)':'#000';
+  ts.style.fontWeight   = isLogin?'500':'600';
+  ts.style.boxShadow    = isLogin?'none':'0 1px 4px rgba(0,0,0,.12)';
   authClearMsg();
 }
 
