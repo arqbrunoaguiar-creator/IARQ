@@ -1,0 +1,6 @@
+{
+  "rewrites": [
+    { "source": "/", "destination": "/iarq-plataforma.html" },
+    { "source": "/(.*)", "destination": "/iarq-plataforma.html" }
+  ]
+}
