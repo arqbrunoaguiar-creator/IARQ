@@ -2279,7 +2279,7 @@ function _patchAutoSave(){
 // ============================================================
 function geminiCall(systemPrompt, messages, maxTokens, onSuccess, onError){
   // Tenta gemini-2.0-flash primeiro, fallback para gemini-1.5-flash
-  var models = ['gemini-2.0-flash', 'gemini-1.5-flash'];
+  var models = ['gemini-1.5-flash-latest', 'gemini-1.5-pro-latest', 'gemini-pro'];
   _geminiTry(models, 0, systemPrompt, messages, maxTokens, onSuccess, onError);
 }
 
