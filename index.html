@@ -6,7 +6,7 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>IARQ — Plataforma</title>
-  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;300&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -316,6 +316,8 @@ body{font-family:-apple-system,'SF Pro Display',system-ui,sans-serif;background:
   .free-bar{flex-direction:column;gap:6px;text-align:center;padding:10px 16px}
   #dash-top-grid{grid-template-columns:1fr 1fr!important}
   #dash-mid-grid{grid-template-columns:1fr!important}
+  #brief-chat-outer{grid-template-columns:1fr!important}
+  #brief-summary-panel{display:none!important}
 }
 </style>
 </head>
@@ -327,14 +329,14 @@ body{font-family:-apple-system,'SF Pro Display',system-ui,sans-serif;background:
   <div style="position:relative;z-index:2;text-align:center">
     <div id="loader-logo" style="font-family:'Raleway',sans-serif;font-weight:200;font-size:52px;letter-spacing:.32em;color:rgba(255,255,255,0);text-transform:uppercase;-webkit-font-smoothing:antialiased;transition:color 1s ease .3s">IARQ</div>
     <div id="loader-line" style="width:0px;height:.5px;background:rgba(255,255,255,.2);margin:14px auto 0;transition:width 1s ease .5s"></div>
-    <div id="loader-sub" style="font-family:'Josefin Sans',sans-serif;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0);margin-top:14px;transition:color 1s ease .8s">Inteligência Artificial para Arquitetos</div>
+    <div id="loader-sub" style="font-family:'Raleway',sans-serif;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0);margin-top:14px;transition:color 1s ease .8s">Inteligência Artificial para Arquitetos</div>
   </div>
 
 <div id="universe-loader" style="position:fixed;inset:0;z-index:88888;background:#000;display:none;align-items:center;justify-content:center;flex-direction:column">
   <canvas id="universe-canvas" style="position:absolute;inset:0;width:100%;height:100%"></canvas>
   <div style="position:relative;z-index:2;text-align:center;pointer-events:none">
     <div id="univ-text" style="font-family:'Raleway',sans-serif;font-weight:200;font-size:13px;letter-spacing:.5em;text-transform:uppercase;color:rgba(255,255,255,0);transition:color 1.2s ease;margin-bottom:8px">Entrando</div>
-    <div id="univ-sub" style="font-family:'Josefin Sans',sans-serif;font-size:8px;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,0);transition:color 1.4s ease .2s">no seu universo</div>
+    <div id="univ-sub" style="font-family:'Raleway',sans-serif;font-size:8px;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,0);transition:color 1.4s ease .2s">no seu universo</div>
   </div>
 </div>
 
@@ -366,8 +368,8 @@ body{font-family:-apple-system,'SF Pro Display',system-ui,sans-serif;background:
 
   <!-- Top nav -->
   <div style="position:absolute;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:28px 40px;z-index:2">
-    <div style="font-size:11px;letter-spacing:2px;color:rgba(255,255,255,.25);font-family:'Josefin Sans',sans-serif;text-transform:uppercase">iarq.vercel.app</div>
-    <div id="auth-nav-right" style="font-size:11px;letter-spacing:1.5px;color:rgba(255,255,255,.35);font-family:'Josefin Sans',sans-serif;text-transform:uppercase;cursor:pointer" onclick="authSwitchTab('signup')">Criar conta</div>
+    <div style="font-size:11px;letter-spacing:2px;color:rgba(255,255,255,.25);font-family:'Raleway',sans-serif;text-transform:uppercase">iarq.vercel.app</div>
+    <div id="auth-nav-right" style="font-size:11px;letter-spacing:1.5px;color:rgba(255,255,255,.35);font-family:'Raleway',sans-serif;text-transform:uppercase;cursor:pointer" onclick="authSwitchTab('signup')">Criar conta</div>
   </div>
 
   <!-- Center content -->
@@ -381,40 +383,40 @@ body{font-family:-apple-system,'SF Pro Display',system-ui,sans-serif;background:
 
     <!-- Dynamic IARQ tagline -->
     <div id="auth-tagline" style="text-align:center;margin-bottom:40px;height:32px;overflow:hidden">
-      <div id="auth-tagline-text" style="font-family:'Josefin Sans',sans-serif;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.28);transition:opacity .6s,transform .6s;opacity:1;transform:translateY(0)"></div>
+      <div id="auth-tagline-text" style="font-family:'Raleway',sans-serif;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.28);transition:opacity .6s,transform .6s;opacity:1;transform:translateY(0)"></div>
     </div>
 
     <!-- Login form -->
     <div id="auth-form-login" style="width:100%">
       <div style="margin-bottom:2px">
-        <div style="font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.25);font-family:'Josefin Sans',sans-serif;margin-bottom:10px">Email</div>
+        <div style="font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.25);font-family:'Raleway',sans-serif;margin-bottom:10px">Email</div>
         <input id="auth-email" type="email" placeholder="seu@email.com"
-          style="width:100%;background:transparent;border:none;border-bottom:.5px solid rgba(255,255,255,.15);padding:10px 0;font-size:14px;color:rgba(255,255,255,.85);outline:none;font-family:'Josefin Sans',sans-serif;letter-spacing:.5px;transition:border .3s"
+          style="width:100%;background:transparent;border:none;border-bottom:.5px solid rgba(255,255,255,.15);padding:10px 0;font-size:14px;color:rgba(255,255,255,.85);outline:none;font-family:'Raleway',sans-serif;letter-spacing:.5px;transition:border .3s"
           onfocus="this.style.borderBottomColor='rgba(255,255,255,.5)'"
           onblur="this.style.borderBottomColor='rgba(255,255,255,.15)'"
           oninput="authCheckAdmMode(this.value)"
           onkeydown="if(event.key==='Enter')document.getElementById('auth-pass').focus()">
       </div>
       <div style="margin-top:28px;margin-bottom:2px">
-        <div style="font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.25);font-family:'Josefin Sans',sans-serif;margin-bottom:10px">Senha</div>
+        <div style="font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.25);font-family:'Raleway',sans-serif;margin-bottom:10px">Senha</div>
         <div style="position:relative">
           <input id="auth-pass" type="password" placeholder="••••••••"
-            style="width:100%;background:transparent;border:none;border-bottom:.5px solid rgba(255,255,255,.15);padding:10px 0;font-size:14px;color:rgba(255,255,255,.85);outline:none;font-family:'Josefin Sans',sans-serif;letter-spacing:2px;transition:border .3s"
+            style="width:100%;background:transparent;border:none;border-bottom:.5px solid rgba(255,255,255,.15);padding:10px 0;font-size:14px;color:rgba(255,255,255,.85);outline:none;font-family:'Raleway',sans-serif;letter-spacing:2px;transition:border .3s"
             onfocus="this.style.borderBottomColor='rgba(255,255,255,.5)'"
             onblur="this.style.borderBottomColor='rgba(255,255,255,.15)'"
             onkeydown="if(event.key==='Enter')authLogin()">
-          <div onclick="authForgot()" style="position:absolute;right:0;top:50%;transform:translateY(-50%);font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.2);cursor:pointer;font-family:'Josefin Sans',sans-serif;transition:color .2s" onmouseover="this.style.color='rgba(255,255,255,.5)'" onmouseout="this.style.color='rgba(255,255,255,.2)'">?</div>
+          <div onclick="authForgot()" style="position:absolute;right:0;top:50%;transform:translateY(-50%);font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.2);cursor:pointer;font-family:'Raleway',sans-serif;transition:color .2s" onmouseover="this.style.color='rgba(255,255,255,.5)'" onmouseout="this.style.color='rgba(255,255,255,.2)'">?</div>
         </div>
       </div>
-      <div id="auth-msg" style="min-height:20px;margin-top:16px;font-size:11px;text-align:center;font-family:'Josefin Sans',sans-serif;letter-spacing:.5px;color:rgba(255,80,80,.7)"></div>
+      <div id="auth-msg" style="min-height:20px;margin-top:16px;font-size:11px;text-align:center;font-family:'Raleway',sans-serif;letter-spacing:.5px;color:rgba(255,80,80,.7)"></div>
 
       <!-- ADM badge — só aparece quando email ADM é digitado -->
       <div id="auth-adm-badge" style="display:none;margin-top:12px;padding:8px 14px;background:rgba(255,159,10,.07);border:.5px solid rgba(255,159,10,.25);border-radius:6px;text-align:center">
-        <span style="font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,159,10,.8);font-family:'Josefin Sans',sans-serif">🛠 Acesso Administrador</span>
+        <span style="font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,159,10,.8);font-family:'Raleway',sans-serif">🛠 Acesso Administrador</span>
       </div>
 
       <button onclick="authLogin()" id="auth-btn-login"
-        style="width:100%;margin-top:32px;background:rgba(255,255,255,.06);border:.5px solid rgba(255,255,255,.12);border-radius:2px;padding:16px;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.7);cursor:pointer;font-family:'Josefin Sans',sans-serif;transition:all .3s"
+        style="width:100%;margin-top:32px;background:rgba(255,255,255,.06);border:.5px solid rgba(255,255,255,.12);border-radius:2px;padding:16px;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.7);cursor:pointer;font-family:'Raleway',sans-serif;transition:all .3s"
         onmouseover="this.style.background='rgba(255,255,255,.1)';this.style.color='rgba(255,255,255,.95)'"
         onmouseout="this.style.background='rgba(255,255,255,.06)';this.style.color='rgba(255,255,255,.7)'"
         id="auth-btn-login">
@@ -423,43 +425,43 @@ body{font-family:-apple-system,'SF Pro Display',system-ui,sans-serif;background:
 
       <!-- Criar conta abaixo -->
       <div style="text-align:center;margin-top:20px">
-        <span style="font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.2);font-family:'Josefin Sans',sans-serif">Não tem conta? </span>
-        <span onclick="authSwitchTab('signup')" style="font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.45);font-family:'Josefin Sans',sans-serif;cursor:pointer;border-bottom:.5px solid rgba(255,255,255,.2);padding-bottom:1px;transition:all .2s" onmouseover="this.style.color='rgba(255,255,255,.8)'" onmouseout="this.style.color='rgba(255,255,255,.45)'">Criar conta</span>
+        <span style="font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.2);font-family:'Raleway',sans-serif">Não tem conta? </span>
+        <span onclick="authSwitchTab('signup')" style="font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.45);font-family:'Raleway',sans-serif;cursor:pointer;border-bottom:.5px solid rgba(255,255,255,.2);padding-bottom:1px;transition:all .2s" onmouseover="this.style.color='rgba(255,255,255,.8)'" onmouseout="this.style.color='rgba(255,255,255,.45)'">Criar conta</span>
       </div>
     </div>
 
     <!-- Signup form -->
     <div id="auth-form-signup" style="width:100%;display:none">
       <div style="margin-bottom:2px">
-        <div style="font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.25);font-family:'Josefin Sans',sans-serif;margin-bottom:10px">Nome</div>
+        <div style="font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.25);font-family:'Raleway',sans-serif;margin-bottom:10px">Nome</div>
         <input id="auth-name" type="text" placeholder="Seu nome"
-          style="width:100%;background:transparent;border:none;border-bottom:.5px solid rgba(255,255,255,.15);padding:10px 0;font-size:14px;color:rgba(255,255,255,.85);outline:none;font-family:'Josefin Sans',sans-serif;letter-spacing:.5px;transition:border .3s"
+          style="width:100%;background:transparent;border:none;border-bottom:.5px solid rgba(255,255,255,.15);padding:10px 0;font-size:14px;color:rgba(255,255,255,.85);outline:none;font-family:'Raleway',sans-serif;letter-spacing:.5px;transition:border .3s"
           onfocus="this.style.borderBottomColor='rgba(255,255,255,.5)'"
           onblur="this.style.borderBottomColor='rgba(255,255,255,.15)'">
       </div>
       <div style="margin-top:28px">
-        <div style="font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.25);font-family:'Josefin Sans',sans-serif;margin-bottom:10px">Email</div>
+        <div style="font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.25);font-family:'Raleway',sans-serif;margin-bottom:10px">Email</div>
         <input id="auth-email-signup" type="email" placeholder="seu@email.com"
-          style="width:100%;background:transparent;border:none;border-bottom:.5px solid rgba(255,255,255,.15);padding:10px 0;font-size:14px;color:rgba(255,255,255,.85);outline:none;font-family:'Josefin Sans',sans-serif;letter-spacing:.5px;transition:border .3s"
+          style="width:100%;background:transparent;border:none;border-bottom:.5px solid rgba(255,255,255,.15);padding:10px 0;font-size:14px;color:rgba(255,255,255,.85);outline:none;font-family:'Raleway',sans-serif;letter-spacing:.5px;transition:border .3s"
           onfocus="this.style.borderBottomColor='rgba(255,255,255,.5)'"
           onblur="this.style.borderBottomColor='rgba(255,255,255,.15)'">
       </div>
       <div style="margin-top:28px">
-        <div style="font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.25);font-family:'Josefin Sans',sans-serif;margin-bottom:10px">Senha</div>
+        <div style="font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.25);font-family:'Raleway',sans-serif;margin-bottom:10px">Senha</div>
         <input id="auth-pass-signup" type="password" placeholder="••••••••"
-          style="width:100%;background:transparent;border:none;border-bottom:.5px solid rgba(255,255,255,.15);padding:10px 0;font-size:14px;color:rgba(255,255,255,.85);outline:none;font-family:'Josefin Sans',sans-serif;letter-spacing:2px;transition:border .3s"
+          style="width:100%;background:transparent;border:none;border-bottom:.5px solid rgba(255,255,255,.15);padding:10px 0;font-size:14px;color:rgba(255,255,255,.85);outline:none;font-family:'Raleway',sans-serif;letter-spacing:2px;transition:border .3s"
           onfocus="this.style.borderBottomColor='rgba(255,255,255,.5)'"
           onblur="this.style.borderBottomColor='rgba(255,255,255,.15)'"
           onkeydown="if(event.key==='Enter')authSignup()">
       </div>
       <button onclick="authSignup()" id="auth-btn-signup"
-        style="width:100%;margin-top:40px;background:rgba(255,255,255,.06);border:.5px solid rgba(255,255,255,.12);border-radius:2px;padding:16px;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.7);cursor:pointer;font-family:'Josefin Sans',sans-serif;transition:all .3s"
+        style="width:100%;margin-top:40px;background:rgba(255,255,255,.06);border:.5px solid rgba(255,255,255,.12);border-radius:2px;padding:16px;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.7);cursor:pointer;font-family:'Raleway',sans-serif;transition:all .3s"
         onmouseover="this.style.background='rgba(255,255,255,.1)';this.style.color='rgba(255,255,255,.95)'"
         onmouseout="this.style.background='rgba(255,255,255,.06)';this.style.color='rgba(255,255,255,.7)'">
         Criar conta
       </button>
       <div style="text-align:center;margin-top:24px">
-        <span onclick="authSwitchTab('login')" style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.2);cursor:pointer;font-family:'Josefin Sans',sans-serif" onmouseover="this.style.color='rgba(255,255,255,.5)'" onmouseout="this.style.color='rgba(255,255,255,.2)'">← Voltar para login</span>
+        <span onclick="authSwitchTab('login')" style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.2);cursor:pointer;font-family:'Raleway',sans-serif" onmouseover="this.style.color='rgba(255,255,255,.5)'" onmouseout="this.style.color='rgba(255,255,255,.2)'">← Voltar para login</span>
       </div>
     </div>
 
@@ -467,7 +469,7 @@ body{font-family:-apple-system,'SF Pro Display',system-ui,sans-serif;background:
 
   <!-- Bottom -->
   <div style="position:absolute;bottom:28px;left:0;right:0;text-align:center;z-index:2">
-    <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.12);font-family:'Josefin Sans',sans-serif">IA para Arquitetos · Brasil</div>
+    <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.12);font-family:'Raleway',sans-serif">IA para Arquitetos · Brasil</div>
   </div>
 
 </div>
@@ -484,16 +486,32 @@ body{font-family:-apple-system,'SF Pro Display',system-ui,sans-serif;background:
   </div>
 
   <nav class="sb-nav" style="padding:10px 0 6px">
-    <div class="ni on" onclick="go('home')"><div class="ni-ico" style="background:rgba(10,132,255,.12);border-color:rgba(10,132,255,.25);color:#0a84ff">⌂</div><span>Dashboard</span></div>
+    <div class="nav-lbl">Meus Projetos</div>
+    <div class="ni on" onclick="go('clientes')" id="ni-clientes">
+      <div class="ni-ico" style="background:rgba(10,132,255,.15);border-color:rgba(10,132,255,.3);color:var(--blue);font-size:13px">◈</div>
+      <span>Clientes</span>
+      <span style="margin-left:auto;font-size:10px;font-weight:700;background:var(--blue);color:#fff;border-radius:980px;padding:2px 8px" id="sb-client-count">0</span>
+    </div>
+    <div class="ni" onclick="go('home')" id="ni-home"><div class="ni-ico" style="background:rgba(10,132,255,.12);border-color:rgba(10,132,255,.25);color:#0a84ff">⌂</div><span>Dashboard</span></div>
 
     <div style="height:10px"></div>
 
-    <div class="ni" onclick="go('briefing')"><div class="ni-ico" style="background:rgba(191,90,242,.12);border-color:rgba(191,90,242,.25);color:#bf5af2">✦</div><span>Briefing<span style="opacity:.5;font-size:10px">.ia</span></span><span class="ni-free-tag">GRÁTIS</span></div>
-    <div class="ni" id="ni-cfo" onclick="go('cfo')"><div class="ni-ico" style="background:rgba(48,209,88,.12);border-color:rgba(48,209,88,.25);color:#30d158">◈</div><span>CFO<span style="opacity:.5;font-size:10px">.ia</span></span><span class="ni-free-tag">GRÁTIS</span></div>
+    <div class="ni" onclick="go('briefing')" id="ni-briefing"><div class="ni-ico" style="background:rgba(191,90,242,.12);border-color:rgba(191,90,242,.25);color:#bf5af2;font-size:15px">⬡</div><span>Briefing<span style="opacity:.5;font-size:10px">.ia</span></span><span class="ni-free-tag">GRÁTIS</span></div>
+    <div class="ni" id="ni-cfo" onclick="go('cfo')"><div class="ni-ico" style="background:rgba(48,209,88,.12);border-color:rgba(48,209,88,.25);color:#30d158">▲</div><span>CFO<span style="opacity:.5;font-size:10px">.ia</span></span><span class="ni-free-tag">GRÁTIS</span></div>
     <div class="ni" id="ni-cmo" onclick="go('cmo')"><div class="ni-ico" style="background:rgba(255,159,10,.12);border-color:rgba(255,159,10,.25);color:#ff9f0a">◇</div><span>CMO<span style="opacity:.5;font-size:10px">.ia</span></span><span class="ni-free-tag">GRÁTIS</span></div>
+    <div class="ni" onclick="go('honorarios')" id="ni-honorarios">
+      <div class="ni-ico">📐</div>
+      <span>Honorários</span>
+      <span class="ni-free-tag">FREE</span>
+    </div>
     <div class="ni" id="ni-orc" onclick="go('orcamento')"><div class="ni-ico" style="background:rgba(255,69,58,.12);border-color:rgba(255,69,58,.25);color:#ff453a">▷</div><span style="line-height:1.25">Orçamento<br><span style="font-size:9px;opacity:.45;font-weight:300;letter-spacing:.2px">Apresentação cinematográfica</span></span><span class="ni-free-tag">GRÁTIS</span></div>
-    <div class="ni locked" id="ni-pag" onclick="requirePro('pagina')"><div class="ni-ico" style="background:rgba(100,210,255,.12);border-color:rgba(100,210,255,.25);color:#64d2ff">⬡</div><span>Landing Page</span><span class="ni-lock">🔒</span></div>
-    <div class="ni locked" id="ni-jur" onclick="requirePro('juridico')"><div class="ni-ico" style="background:rgba(255,214,10,.12);border-color:rgba(255,214,10,.25);color:#ffd60a;font-size:14px">⚖</div><span>Jurídico<span style="opacity:.5;font-size:10px">.ia</span></span><span class="ni-lock">🔒</span></div>
+    <div class="ni" onclick="go('visita')" id="ni-visita">
+      <div class="ni-ico">📍</div>
+      <span>Modo Visita</span>
+      <span class="ni-free-tag">FREE</span>
+    </div>
+    <div class="ni locked" id="ni-pag" onclick="toast('Em breve no plano Pro ✦')"><div class="ni-ico" style="background:rgba(100,210,255,.12);border-color:rgba(100,210,255,.25);color:#64d2ff">⬡</div><span>Landing Page</span><span class="ni-lock">🚧</span></div>
+    <div class="ni locked" id="ni-jur" onclick="toast('Em breve no plano Pro ✦')"><div class="ni-ico" style="background:rgba(255,214,10,.12);border-color:rgba(255,214,10,.25);color:#ffd60a;font-size:14px">⚖</div><span>Jurídico<span style="opacity:.5;font-size:10px">.ia</span></span><span class="ni-lock">🚧</span></div>
 
     <div style="height:10px"></div>
 
@@ -625,6 +643,23 @@ body{font-family:-apple-system,'SF Pro Display',system-ui,sans-serif;background:
       </div>
     </div>
 
+    <!-- META DO MÊS -->
+    <div id="dash-meta-card" style="background:linear-gradient(135deg,rgba(48,209,88,.06),rgba(48,209,88,.02));border:.5px solid rgba(48,209,88,.15);border-radius:var(--r);padding:18px 22px;margin-bottom:14px;display:flex;align-items:center;gap:20px;flex-wrap:wrap">
+      <div style="flex:1;min-width:200px">
+        <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--green);margin-bottom:6px">Meta do mês</div>
+        <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:8px">
+          <span style="font-size:22px;font-weight:700;letter-spacing:-.6px" id="dash-meta-atual">R$ 0</span>
+          <span style="font-size:13px;color:var(--w40)">de</span>
+          <span style="font-size:16px;font-weight:600;color:var(--w60)" id="dash-meta-total">R$ 0</span>
+        </div>
+        <div style="width:100%;height:4px;background:var(--w10);border-radius:2px;overflow:hidden">
+          <div id="dash-meta-bar" style="height:100%;border-radius:2px;background:var(--green);transition:width .8s ease;width:0%"></div>
+        </div>
+        <div style="font-size:11px;color:var(--w40);margin-top:6px" id="dash-meta-frase">Configure seu perfil no CFO para ver sua meta</div>
+      </div>
+      <button onclick="go('cfo')" style="background:rgba(48,209,88,.1);border:.5px solid rgba(48,209,88,.25);color:var(--green);border-radius:980px;padding:8px 16px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap">Atualizar CFO →</button>
+    </div>
+
     <!-- CALENDÁRIO + NOTAS RÁPIDAS -->
     <div style="display:grid;grid-template-columns:1.2fr 1fr;gap:12px;margin-bottom:12px" id="dash-mid-grid">
 
@@ -748,13 +783,96 @@ body{font-family:-apple-system,'SF Pro Display',system-ui,sans-serif;background:
 
   </div>
 
+<!-- ===== CLIENTES / PIPELINE ===== -->
+<div class="page" id="page-clientes">
+
+  <!-- HEADER -->
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:12px">
+    <div>
+      <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--blue2);margin-bottom:4px">Seus projetos</div>
+      <div style="font-size:24px;font-weight:700;letter-spacing:-.6px">Clientes</div>
+      <div style="font-size:12px;color:var(--w40);font-weight:300;margin-top:2px">Acompanhe cada cliente do primeiro contato à entrega</div>
+    </div>
+    <button class="btn bb" onclick="clienteNovo()" style="gap:8px">+ Novo cliente</button>
+  </div>
+
+  <!-- MODAL NOVO CLIENTE -->
+  <div id="cliente-modal" style="display:none;position:fixed;inset:0;z-index:3000;background:rgba(0,0,0,.8);backdrop-filter:blur(20px);align-items:center;justify-content:center;padding:20px">
+    <div style="width:100%;max-width:440px;background:#111;border:.5px solid rgba(255,255,255,.1);border-radius:20px;overflow:hidden;box-shadow:0 40px 100px rgba(0,0,0,.7)">
+      <div style="padding:24px 24px 0;display:flex;align-items:center;justify-content:space-between">
+        <div style="font-size:16px;font-weight:700;letter-spacing:-.3px">Novo cliente</div>
+        <button onclick="clienteFecharModal()" style="background:rgba(255,255,255,.08);border:none;color:var(--w60);width:28px;height:28px;border-radius:50%;cursor:pointer;font-size:14px">✕</button>
+      </div>
+      <div style="padding:20px 24px 24px">
+        <div class="form-field" style="margin-bottom:14px">
+          <label class="form-label">Nome do cliente *</label>
+          <input class="form-input" id="cliente-novo-nome" placeholder="Ex: João Silva" onkeydown="if(event.key==='Enter')clienteConfirmar()">
+        </div>
+        <div class="form-field" style="margin-bottom:14px">
+          <label class="form-label">Tipo de projeto</label>
+          <select class="form-input" id="cliente-novo-tipo">
+            <option value="">Selecionar...</option>
+            <option value="interiores">Design de Interiores</option>
+            <option value="arquitetura">Projeto Arquitetônico</option>
+            <option value="reforma">Reforma</option>
+            <option value="comercial">Projeto Comercial</option>
+            <option value="paisagismo">Paisagismo</option>
+          </select>
+        </div>
+        <div class="form-field" style="margin-bottom:20px">
+          <label class="form-label">Área estimada (m²)</label>
+          <input class="form-input" id="cliente-novo-area" type="number" placeholder="Ex: 180">
+        </div>
+        <button class="btn bb" style="width:100%;justify-content:center;padding:14px" onclick="clienteConfirmar()">Criar jornada do cliente ✦</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- LISTA DE CLIENTES PIPELINE -->
+  <div id="clientes-lista"></div>
+
+  <!-- EMPTY STATE -->
+  <div id="clientes-empty" style="text-align:center;padding:80px 20px;display:none">
+    <div style="font-size:48px;margin-bottom:16px;opacity:.2">◈</div>
+    <div style="font-size:16px;font-weight:600;color:var(--w60);margin-bottom:6px">Nenhum cliente ainda</div>
+    <div style="font-size:13px;color:var(--w40);margin-bottom:24px;font-weight:300">Crie seu primeiro cliente para começar a jornada</div>
+    <button class="btn bb" onclick="clienteNovo()">+ Criar primeiro cliente</button>
+  </div>
+</div>
+
+<!-- ===== DETALHE DO CLIENTE ===== -->
+<div class="page" id="page-cliente-detalhe">
+  <div style="display:flex;align-items:center;gap:12px;margin-bottom:24px;flex-wrap:wrap">
+    <button class="btn bo bsm" onclick="go('clientes')">← Clientes</button>
+    <div style="flex:1">
+      <div style="font-size:20px;font-weight:700;letter-spacing:-.5px" id="detalhe-nome">—</div>
+      <div style="font-size:12px;color:var(--w40);margin-top:2px" id="detalhe-tipo">—</div>
+    </div>
+    <div id="detalhe-status-badge" style="font-size:11px;font-weight:600;border-radius:980px;padding:5px 14px;border:.5px solid"></div>
+  </div>
+
+  <!-- LINHA DO TEMPO -->
+  <div style="background:var(--g);border:.5px solid var(--br);border-radius:var(--r);padding:24px;margin-bottom:20px">
+    <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--w40);margin-bottom:20px">Jornada do projeto</div>
+    <div id="detalhe-timeline" style="display:flex;align-items:flex-start;gap:0;overflow-x:auto;padding-bottom:8px"></div>
+  </div>
+
+  <!-- AÇÃO ATUAL -->
+  <div id="detalhe-acao-atual" style="background:linear-gradient(135deg,rgba(10,132,255,.08),rgba(10,132,255,.02));border:.5px solid rgba(10,132,255,.2);border-radius:var(--r);padding:20px;margin-bottom:20px">
+    <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--blue2);margin-bottom:8px">Próxima ação</div>
+    <div style="font-size:15px;font-weight:600;color:var(--w90);margin-bottom:12px" id="detalhe-proxima-acao">—</div>
+    <button class="btn bb" id="detalhe-btn-acao" onclick="">Iniciar →</button>
+  </div>
+
+  <!-- HISTÓRICO DE ETAPAS -->
+  <div style="background:var(--g);border:.5px solid var(--br);border-radius:var(--r);padding:20px">
+    <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--w40);margin-bottom:16px">Histórico</div>
+    <div id="detalhe-historico" style="display:flex;flex-direction:column;gap:10px"></div>
+  </div>
+</div>
+
   <!-- ===== BRIEFING ===== -->
   <div class="page" id="page-briefing">
-    <div class="lim-bar" id="brief-lim">
-      <div class="lim-txt">Plano gratuito: <strong id="brief-left-txt">1 briefing disponível</strong></div>
-      <div class="lim-prog"><div class="lim-fill" id="brief-fill" style="width:100%"></div></div>
-      <button class="btn bb bsm" onclick="go('upgrade')">Ilimitado no Pro</button>
-    </div>
 
     <!-- MODAL NOVO CLIENTE -->
     <div id="brief-new-modal" style="display:none;position:fixed;inset:0;z-index:3000;background:rgba(0,0,0,.75);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);align-items:center;justify-content:center;padding:20px">
@@ -798,10 +916,18 @@ body{font-family:-apple-system,'SF Pro Display',system-ui,sans-serif;background:
       <div id="brief-clients-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px"></div>
 
       <div id="brief-clients-empty" style="text-align:center;padding:60px 20px;display:none">
-        <div style="font-size:40px;margin-bottom:12px;opacity:.3">✦</div>
+        <div style="font-size:40px;margin-bottom:12px;opacity:.3">⬡</div>
         <div style="font-size:14px;font-weight:500;color:var(--w60)">Nenhum cliente ainda</div>
         <div style="font-size:12px;color:var(--w40);margin-top:4px;margin-bottom:20px">Crie um briefing para começar a entender seus clientes</div>
         <button class="btn bb bsm" onclick="briefNewClient()">Criar primeiro briefing</button>
+      </div>
+
+      <!-- Limite discreto no rodapé -->
+      <div id="brief-lim" style="margin-top:20px;display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--w02);border:.5px solid var(--br);border-radius:var(--r2)">
+        <div style="width:5px;height:5px;border-radius:50%;background:var(--orange);flex-shrink:0"></div>
+        <div style="font-size:11px;color:var(--w40);flex:1">Plano gratuito · <strong id="brief-left-txt" style="color:var(--w60)">1 briefing disponível</strong></div>
+        <div class="lim-prog" style="width:60px"><div class="lim-fill" id="brief-fill" style="width:100%"></div></div>
+        <button class="btn bo bsm" onclick="go('upgrade')" style="font-size:10px;padding:4px 12px;color:var(--orange);border-color:rgba(255,159,10,.25)">Ilimitado →</button>
       </div>
     </div>
 
@@ -819,7 +945,34 @@ body{font-family:-apple-system,'SF Pro Display',system-ui,sans-serif;background:
         <button class="btn bb bsm" id="rep-btn" style="display:none" onclick="briefViewReport()">Ver Relatório →</button>
       </div>
 
-      <div class="chat-wrap" id="brief-wrap">
+      <div style="display:grid;grid-template-columns:1fr 240px;gap:12px;align-items:start" id="brief-chat-outer">
+      <!-- Painel de resumo em tempo real -->
+      <div id="brief-summary-panel" style="background:var(--g);border:.5px solid var(--br);border-radius:var(--r);padding:16px;position:sticky;top:70px;order:2">
+        <div style="font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--w40);margin-bottom:12px">Resumo em formação</div>
+        <div id="brief-sum-tipo" style="display:none;margin-bottom:8px">
+          <div style="font-size:9px;color:var(--w40);letter-spacing:1px;text-transform:uppercase;margin-bottom:3px">Tipo</div>
+          <div style="font-size:12px;font-weight:600;color:var(--w90)" id="brief-sum-tipo-val">—</div>
+        </div>
+        <div id="brief-sum-area" style="display:none;margin-bottom:8px">
+          <div style="font-size:9px;color:var(--w40);letter-spacing:1px;text-transform:uppercase;margin-bottom:3px">Área</div>
+          <div style="font-size:12px;font-weight:600;color:var(--w90)" id="brief-sum-area-val">—</div>
+        </div>
+        <div id="brief-sum-estilo" style="display:none;margin-bottom:8px">
+          <div style="font-size:9px;color:var(--w40);letter-spacing:1px;text-transform:uppercase;margin-bottom:3px">Estilo</div>
+          <div style="font-size:12px;font-weight:600;color:var(--w90)" id="brief-sum-estilo-val">—</div>
+        </div>
+        <div id="brief-sum-budget" style="display:none;margin-bottom:8px">
+          <div style="font-size:9px;color:var(--w40);letter-spacing:1px;text-transform:uppercase;margin-bottom:3px">Budget</div>
+          <div style="font-size:12px;font-weight:600;color:var(--green)" id="brief-sum-budget-val">—</div>
+        </div>
+        <div id="brief-sum-prazo" style="display:none;margin-bottom:8px">
+          <div style="font-size:9px;color:var(--w40);letter-spacing:1px;text-transform:uppercase;margin-bottom:3px">Prazo</div>
+          <div style="font-size:12px;font-weight:600;color:var(--w90)" id="brief-sum-prazo-val">—</div>
+        </div>
+        <div id="brief-sum-empty" style="text-align:center;padding:16px 0;color:var(--w40);font-size:11px;line-height:1.6">As informações do cliente<br>aparecem aqui conforme<br>o briefing avança ✦</div>
+      </div>
+
+      <div class="chat-wrap" id="brief-wrap" style="order:1">
         <div class="chat-head" style="background:linear-gradient(135deg,rgba(123,47,247,.15),rgba(191,90,242,.08));border-color:rgba(191,90,242,.2)">
           <div id="brief-aura-av" style="width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,#7b2ff7,#bf5af2);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;box-shadow:0 4px 16px rgba(123,47,247,.4)">✦</div>
           <div style="flex:1">
@@ -840,6 +993,7 @@ body{font-family:-apple-system,'SF Pro Display',system-ui,sans-serif;background:
           </div>
         </div>
       </div>
+      </div><!-- fim brief-chat-outer -->
     </div>
   </div>
 
@@ -848,8 +1002,9 @@ body{font-family:-apple-system,'SF Pro Display',system-ui,sans-serif;background:
     <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;flex-wrap:wrap">
       <button class="btn bo bsm" onclick="briefBackToList()">← Clientes</button>
       <div style="font-size:18px;font-weight:700;letter-spacing:-.5px" id="r-client-header">Relatório do Cliente</div>
-      <div style="margin-left:auto">
+      <div style="margin-left:auto;display:flex;gap:8px">
         <button class="btn bo bsm" onclick="briefExportPDF()">⬇ PDF</button>
+        <button class="btn bo bsm" onclick="briefExportWA()" style="color:#25d366;border-color:rgba(37,211,102,.3)">📱 WhatsApp</button>
       </div>
     </div>
     <div class="rep-card" id="brief-report-content">
@@ -2278,17 +2433,29 @@ Planta baixa"></textarea></div>
         <div class="uw-ico">⬡</div>
         <div class="uw-t">Página do Escritório</div>
         <div class="uw-s">IA gera sua landing page com portfólio, editável e com link compartilhável para clientes.</div>
-        <div class="pix-box">
-          <div class="pix-lbl">Desbloquear via PIX</div>
-          <div class="pix-amt"><sup>R$</sup>997</div>
-          <div class="pix-save">Acesso vitalício</div>
-          <div class="pix-key-row">
-            <span class="pix-key-lbl">Chave PIX (CPF)</span>
-            <span class="pix-key-val">000.000.000-00</span>
-            <button class="copy-b" onclick="copyPix()">Copiar</button>
+        <div style="background:rgba(0,158,227,.08);border:.5px solid rgba(0,158,227,.25);border-radius:var(--r);padding:22px;margin-bottom:16px">
+          <div style="font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#009ee3;margin-bottom:12px">PAGAMENTO SEGURO</div>
+          <div style="font-size:12px;color:rgba(255,255,255,.4);text-decoration:line-through;margin-bottom:4px">R$ 2.997</div>
+          <div style="font-size:56px;font-weight:700;letter-spacing:-2px;line-height:1;margin-bottom:6px"><sup style="font-size:22px;font-weight:300;vertical-align:super;color:rgba(255,255,255,.6)">R$</sup>1.997</div>
+          <div style="font-size:13px;color:#009ee3;margin-bottom:4px">à vista · ou 12x de R$ 197</div>
+          <div style="font-size:12px;color:rgba(255,255,255,.4);margin-bottom:20px">Acesso vitalício · Todas as atualizações incluídas</div>
+
+          <!-- Botão MP à vista -->
+          <a id="mp-link-avista" href="#" onclick="abrirMP('avista');return false;" style="display:flex;align-items:center;justify-content:center;gap:10px;background:#009ee3;color:#fff;font-size:14px;font-weight:700;padding:16px 24px;border-radius:980px;text-decoration:none;margin-bottom:10px;transition:all .2s" onmouseover="this.style.background='#0082bd'" onmouseout="this.style.background='#009ee3'">
+            <svg width="20" height="20" viewBox="0 0 36 36" fill="white"><path d="M18 0C8.06 0 0 8.06 0 18s8.06 18 18 18 18-8.06 18-18S27.94 0 18 0zm8.5 14.5c-.28 1.5-1.3 2.8-2.7 3.4l-2.1.9c-.4.2-.6.6-.5 1l.5 2.3c.1.5-.3 1-.8 1H16c-.5 0-.9-.4-.8-.9l.6-2.8c.1-.4-.1-.8-.5-1l-2.1-.9c-1.4-.6-2.4-1.9-2.7-3.4-.5-2.6 1.2-5.1 3.8-5.5 1.7-.3 3.4.3 4.5 1.6.1.1.3.1.4 0 1.1-1.3 2.8-1.9 4.5-1.6 2.6.4 4.3 2.9 3.8 5.5z"/></svg>
+            Pagar R$ 1.997 via Mercado Pago
+          </a>
+
+          <!-- Botão MP parcelado -->
+          <a id="mp-link-parcelado" href="#" onclick="abrirMP('parcelado');return false;" style="display:flex;align-items:center;justify-content:center;gap:8px;background:rgba(0,158,227,.1);color:#009ee3;border:.5px solid rgba(0,158,227,.3);font-size:13px;font-weight:600;padding:13px 24px;border-radius:980px;text-decoration:none;transition:all .2s" onmouseover="this.style.background='rgba(0,158,227,.2)'" onmouseout="this.style.background='rgba(0,158,227,.1)'">
+            12x de R$ 197 · Parcelado no cartão
+          </a>
+
+          <div style="display:flex;align-items:center;justify-content:center;gap:6px;margin-top:14px">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="rgba(255,255,255,.3)"><path d="M12 2L4 6v6c0 5.5 3.4 10.7 8 12 4.6-1.3 8-6.5 8-12V6l-8-4z"/></svg>
+            <span style="font-size:11px;color:rgba(255,255,255,.3)">Pagamento seguro · Criptografado · Garantia de 7 dias</span>
           </div>
         </div>
-        <a class="wa-btn" id="wa-pag" href="#" target="_blank">💬 Já paguei — enviar comprovante</a>
       </div>
     </div>
 
@@ -2497,6 +2664,161 @@ Planta baixa"></textarea></div>
         <div id="pg-preview" style="border:.5px solid var(--br2);border-radius:var(--r);overflow:hidden;background:#080808;max-height:720px;overflow-y:auto"></div>
       </div>
 
+    </div>
+  </div>
+
+  <!-- ===== HONORÁRIOS ===== -->
+  <div class="page" id="page-honorarios">
+    <div style="max-width:600px">
+      <div style="margin-bottom:24px">
+        <div style="font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--blue2);margin-bottom:4px">Ferramenta Gratuita</div>
+        <div style="font-size:22px;font-weight:700;letter-spacing:-.7px">Calculadora de Honorários</div>
+        <div style="font-size:13px;color:var(--w40);font-weight:300;margin-top:2px">Calcule e justifique seus honorários com precisão</div>
+      </div>
+
+      <div style="background:var(--g);border:.5px solid var(--br);border-radius:var(--r);padding:22px;display:flex;flex-direction:column;gap:14px">
+        <div class="form-row">
+          <div class="form-field">
+            <label class="form-label">Área do projeto (m²)</label>
+            <input class="form-input" type="number" id="hon-area" placeholder="Ex: 120" min="1">
+          </div>
+          <div class="form-field">
+            <label class="form-label">Tipo de projeto</label>
+            <select class="form-input" id="hon-tipo">
+              <option value="residencial">Residencial</option>
+              <option value="comercial">Comercial</option>
+              <option value="corporativo">Corporativo</option>
+              <option value="paisagismo">Paisagismo</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-field">
+            <label class="form-label">Complexidade</label>
+            <select class="form-input" id="hon-complex">
+              <option value="simples">Simples</option>
+              <option value="medio" selected>Médio</option>
+              <option value="complexo">Complexo</option>
+              <option value="luxo">Luxo / Alto padrão</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label class="form-label">Prazo desejado</label>
+            <select class="form-input" id="hon-prazo">
+              <option value="1-2">1–2 meses</option>
+              <option value="3-4" selected>3–4 meses</option>
+              <option value="5-6">5–6 meses</option>
+              <option value="6+">+6 meses</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-field">
+            <label class="form-label">Horas estimadas (editável)</label>
+            <input class="form-input" type="number" id="hon-horas" placeholder="Calculado automaticamente" min="1">
+          </div>
+          <div class="form-field">
+            <label class="form-label">Valor/hora do arquiteto (R$)</label>
+            <input class="form-input" type="number" id="hon-vlhora" placeholder="150" value="150" min="1">
+          </div>
+        </div>
+        <button class="btn bb" onclick="calcHonorarios()" style="width:100%;justify-content:center;padding:14px;font-size:14px">📐 Calcular Honorários</button>
+      </div>
+
+      <!-- Resultado -->
+      <div id="hon-result" style="display:none;margin-top:18px">
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:18px">
+          <div style="background:rgba(10,132,255,.08);border:.5px solid rgba(10,132,255,.25);border-radius:var(--r);padding:16px;text-align:center">
+            <div style="font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--blue2);margin-bottom:6px">Mínimo</div>
+            <div id="hon-vl-min" style="font-size:20px;font-weight:700;color:#fff">—</div>
+          </div>
+          <div style="background:rgba(10,132,255,.15);border:.5px solid rgba(10,132,255,.4);border-radius:var(--r);padding:16px;text-align:center">
+            <div style="font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--blue2);margin-bottom:6px">Ideal ✦</div>
+            <div id="hon-vl-ideal" style="font-size:22px;font-weight:800;color:var(--blue2)">—</div>
+          </div>
+          <div style="background:rgba(191,90,242,.08);border:.5px solid rgba(191,90,242,.25);border-radius:var(--r);padding:16px;text-align:center">
+            <div style="font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:#bf5af2;margin-bottom:6px">Premium</div>
+            <div id="hon-vl-premium" style="font-size:20px;font-weight:700;color:#bf5af2">—</div>
+          </div>
+        </div>
+
+        <div style="background:var(--g);border:.5px solid var(--br);border-radius:var(--r);padding:18px">
+          <div style="font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--w40);margin-bottom:10px">Justificativa para o cliente</div>
+          <div id="hon-justif" style="font-size:13px;color:var(--w80);line-height:1.8;font-weight:300;white-space:pre-wrap"></div>
+          <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap">
+            <button class="btn bo bsm" onclick="honCopiarJustif()">📋 Copiar justificativa</button>
+            <button class="btn bo bsm" onclick="honCopiarWA()" style="color:#25d366;border-color:rgba(37,211,102,.3)">📱 Copiar para WhatsApp</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== MODO VISITA ===== -->
+  <div class="page" id="page-visita">
+    <div style="max-width:640px">
+      <div style="margin-bottom:24px">
+        <div style="font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#ff9f0a;margin-bottom:4px">Ferramenta Gratuita</div>
+        <div style="font-size:22px;font-weight:700;letter-spacing:-.7px">Modo Visita</div>
+        <div style="font-size:13px;color:var(--w40);font-weight:300;margin-top:2px">Use na obra ou visita ao imóvel</div>
+      </div>
+
+      <!-- Seção 1: Dados da visita -->
+      <div style="background:var(--g);border:.5px solid var(--br);border-radius:var(--r);padding:20px;margin-bottom:14px">
+        <div style="font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--w40);margin-bottom:14px">Dados da visita</div>
+        <div class="form-field" style="margin-bottom:12px">
+          <label class="form-label">Nome do imóvel / cliente</label>
+          <input class="form-input" type="text" id="vis-nome" placeholder="Ex: Apto João Silva — Rua das Flores">
+        </div>
+        <div class="form-row">
+          <div class="form-field">
+            <label class="form-label">Endereço</label>
+            <input class="form-input" type="text" id="vis-end" placeholder="Rua, número, cidade">
+          </div>
+          <div class="form-field">
+            <label class="form-label">Tipo de visita</label>
+            <select class="form-input" id="vis-tipo">
+              <option value="inicial">Visita inicial</option>
+              <option value="vistoria">Vistoria</option>
+              <option value="obra">Acompanhamento de obra</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Seção 2: Checklist por ambiente -->
+      <div style="background:var(--g);border:.5px solid var(--br);border-radius:var(--r);padding:20px;margin-bottom:14px">
+        <div style="font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--w40);margin-bottom:14px">Checklist por ambiente</div>
+        <div id="vis-ambientes" style="display:flex;flex-direction:column;gap:10px"></div>
+      </div>
+
+      <!-- Seção 3: Observações gerais -->
+      <div style="background:var(--g);border:.5px solid var(--br);border-radius:var(--r);padding:20px;margin-bottom:14px">
+        <div style="font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--w40);margin-bottom:10px">Observações gerais</div>
+        <textarea class="form-input" id="vis-obs" rows="4" placeholder="Anote pontos importantes, pendências, medidas, materiais..."></textarea>
+      </div>
+
+      <!-- Seção 4: Fotos -->
+      <div style="background:var(--g);border:.5px solid var(--br);border-radius:var(--r);padding:20px;margin-bottom:18px">
+        <div style="font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--w40);margin-bottom:10px">Fotos da visita</div>
+        <label style="display:inline-flex;align-items:center;gap:8px;background:var(--w06);border:.5px solid var(--br2);border-radius:980px;padding:9px 18px;font-size:13px;font-weight:500;color:var(--w90);cursor:pointer">
+          📷 Adicionar foto
+          <input type="file" accept="image/*" capture="environment" multiple id="vis-fotos" style="display:none" onchange="visitaAddFotos(this)">
+        </label>
+        <div id="vis-fotos-preview" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:12px"></div>
+      </div>
+
+      <button class="btn bb" onclick="visitaGerarRelatorio()" style="width:100%;justify-content:center;padding:14px;font-size:14px">📋 Gerar Relatório de Visita</button>
+
+      <!-- Resultado -->
+      <div id="vis-result" style="display:none;margin-top:18px;background:var(--g);border:.5px solid var(--br);border-radius:var(--r);padding:20px">
+        <div style="font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--w40);margin-bottom:12px">Relatório gerado</div>
+        <pre id="vis-relatorio" style="font-family:inherit;font-size:13px;color:var(--w80);line-height:1.8;white-space:pre-wrap;word-break:break-word"></pre>
+        <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap">
+          <button class="btn bo bsm" onclick="visitaCopiar()">📋 Copiar relatório</button>
+          <button class="btn bo bsm" onclick="visitaCopiarWA()" style="color:#25d366;border-color:rgba(37,211,102,.3)">📱 Copiar para WhatsApp</button>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -2854,7 +3176,10 @@ function briefRenderList(){
       +'<div style="font-size:11px;color:var(--w40)">'+(c.date||'')+'</div>'
       +'<div style="font-size:10px;font-weight:600;color:'+statusColor+';background:'+statusColor+'18;border:.5px solid '+statusColor+'35;border-radius:980px;padding:3px 10px">'+statusLabel+'</div>'
       +'</div>'
-      +(c.done?'<button onclick="event.stopPropagation();briefViewClientReport(\''+c.id+'\')" style="margin-top:12px;width:100%;padding:8px;background:rgba(191,90,242,.08);border:.5px solid rgba(191,90,242,.2);color:#bf5af2;border-radius:8px;cursor:pointer;font-size:12px;font-weight:500;font-family:inherit;transition:all .2s">Ver Relatório →</button>':'')
+      +(c.done
+        ? '<button onclick="event.stopPropagation();briefViewClientReport(\''+c.id+'\')" style="margin-top:12px;width:100%;padding:9px;background:rgba(191,90,242,.08);border:.5px solid rgba(191,90,242,.2);color:#bf5af2;border-radius:8px;cursor:pointer;font-size:12px;font-weight:600;font-family:inherit;transition:all .2s">Ver Relatório →</button>'
+        : '<button onclick="event.stopPropagation();briefOpenClient(\''+c.id+'\')" style="margin-top:12px;width:100%;padding:9px;background:rgba(10,132,255,.08);border:.5px solid rgba(10,132,255,.2);color:var(--blue2);border-radius:8px;cursor:pointer;font-size:12px;font-weight:600;font-family:inherit;transition:all .2s">Continuar briefing →</button>'
+      )
       +'</div>';
   }).join('');
 }
@@ -3103,7 +3428,7 @@ function briefAIStart(){
     function(err){
       rmTyping('brief');
       var clientName = firstName || 'seu cliente';
-      var msg = 'Olá! Sou a **AURA**, especialista em briefing da IARQ. 👋\n\nVou te ajudar a entender profundamente **' + clientName + '** antes de começar a projetar.\n\nPrimeira pergunta: o projeto de **' + clientName + '** é de **Arquitetura** ou **Interiores**?';
+      var msg = 'Vou te ajudar a entender profundamente **' + clientName + '** antes de começar a projetar.\n\nPrimeira pergunta: o projeto de **' + clientName + '** é de **Arquitetura** ou **Interiores**?';
       addM('brief','ai',msg);
       briefAIHistory.push({role:'assistant', content:msg});
       briefSaveMsg('assistant', msg);
@@ -3151,6 +3476,7 @@ function sendBrief(){
   addM('brief','user',t);
   briefAIHistory.push({role:'user', content:t});
   briefSaveMsg('user', t);
+  briefUpdateSummary(t);
   inp.value=''; ar(inp); setQA('brief',[]);
 
   var client = briefClients.find(function(x){return x.id===briefCurrentId;});
@@ -3183,7 +3509,20 @@ function sendBrief(){
         var repBtn = document.getElementById('rep-btn');
         if(repBtn) repBtn.style.display = 'inline-flex';
         setTimeout(function(){
-          addM('brief','ai','✦ Briefing concluído! Clique em **Ver Relatório** para acessar a análise completa do cliente.');
+          addM('brief','ai','✦ Briefing concluído! Acesse o **Relatório completo** ou avance direto para o **Orçamento** deste cliente.');
+          // CTA final com dois botões
+          setTimeout(function(){
+            var msgs = document.getElementById('brief-msgs');
+            if(!msgs) return;
+            var cta = document.createElement('div');
+            cta.style.cssText = 'display:flex;gap:8px;flex-wrap:wrap;padding:4px 0 8px 34px';
+            var c = briefClients.find(function(x){return x.id===briefCurrentId;});
+            var cname = c ? c.name : '';
+            cta.innerHTML = '<button onclick="briefViewReport()" style="background:rgba(191,90,242,.12);border:.5px solid rgba(191,90,242,.25);color:#bf5af2;border-radius:980px;padding:8px 16px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .2s">Ver Relatório →</button>'
+              + '<button onclick="briefIrOrcamento()" style="background:var(--blue);border:none;color:#fff;border-radius:980px;padding:8px 16px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .2s">Criar Orçamento ↗</button>';
+            msgs.appendChild(cta);
+            msgs.scrollTop = msgs.scrollHeight;
+          }, 600);
         }, 800);
         if(!S.isPro) setTimeout(function(){
           addM('brief','ai','💡 Você usou seu briefing gratuito. Faça upgrade para briefings ilimitados.');
@@ -3344,7 +3683,7 @@ function cfoInitChat() {
   var temPerfil = cfoPerfil.fat || cfoPerfil.gas;
   var abertura = temPerfil
     ? 'Olá! Analisei seu perfil financeiro. Com faturamento de **R$'+cfoPerfil.fat+'** e gastos de **R$'+cfoPerfil.gas+'**, posso ajudar com precificação, caixa, produtividade e reservas.\n\nO que quer resolver hoje?'
-    : 'Olá! Sou a AURA no modo CFO.ia. Para te dar conselhos precisos, preencha primeiro seu **perfil financeiro** na aba ao lado.\n\nOu pode perguntar diretamente — farei o melhor com as informações disponíveis.';
+    : 'Qual é o seu maior desafio financeiro hoje?\n\nEscolha abaixo ou me conte diretamente:';
 
   cfoChatAddMsg('ai', abertura);
   cfoChatHistory.push({role:'assistant', content: abertura});
@@ -3352,7 +3691,7 @@ function cfoInitChat() {
   // Quick buttons iniciais
   var quickEl = document.getElementById('cfo-quick-btns');
   if(quickEl) {
-    var btns = ['Diagnóstico completo', 'Precificação', 'Reserva de emergência', 'Produtividade'];
+    var btns = ['Estou cobrando certo?', 'Não sobra nada no fim do mês', 'Quero saber minha meta', 'Cliente não está pagando'];
     quickEl.innerHTML = btns.map(function(b){
       return '<button class="qb" onclick="cfoQuickAsk(\''+b+'\')" style="font-size:11px">'+b+'</button>';
     }).join('');
@@ -4200,6 +4539,7 @@ function renderOrcList(){
       +'<select onclick="event.stopPropagation()" onchange="orcSetStatus(\''+cl.id+'\',this.value)" style="font-size:11px;font-weight:600;background:var(--w04);border:.5px solid var(--br);border-radius:980px;padding:4px 10px;cursor:pointer;color:'+(SC[cl.status]||'var(--w60)')+'">'
         +['Nova proposta','Em negociação','Fechado','Perdido'].map(function(s){return'<option value="'+s+'"'+(cl.status===s?' selected':'')+'>'+s+'</option>';}).join('')
       +'</select>'
+      +'<button onclick="event.stopPropagation();orcFollowUp(\''+cl.name+'\')" style="font-size:11px;font-weight:600;background:rgba(37,211,102,.08);border:.5px solid rgba(37,211,102,.25);color:#25d366;border-radius:980px;padding:5px 12px;cursor:pointer;white-space:nowrap">💬 Follow-up</button>'
       +'<button onclick="event.stopPropagation();orcDeleteClient(\''+cl.id+'\')" style="font-size:10px;color:var(--red);background:none;border:none;cursor:pointer;padding:4px 6px">✕</button>'
     +'</div>';
   }).join('');
@@ -4209,10 +4549,15 @@ function orcSetStatus(id,s){var cl=orcClients.find(function(x){return x.id===id;
 
 function orcNewClient(){
   if(!S.isPro&&orcClients.length>=S.orcMax){go('upgrade');return;}
-  var name=prompt('Nome do cliente:');
+  var ctx = JSON.parse(localStorage.getItem('iarq_cliente_contexto') || '{}');
+  var defaultName = ctx.nome || '';
+  var defaultType = ctx.tipo ? ({interiores:'Apartamento residencial',arquitetura:'Casa residencial',reforma:'Reforma residencial',comercial:'Loja comercial',paisagismo:'Paisagismo'}[ctx.tipo] || 'Apartamento residencial') : 'Apartamento residencial';
+  var defaultArea = ctx.area || '';
+  if(ctx.nome) localStorage.removeItem('iarq_cliente_contexto');
+  var name=prompt('Nome do cliente:', defaultName);
   if(!name||!name.trim())return;
   var id='orc'+Date.now();
-  orcClients.push({id:id,name:name.trim(),type:'Apartamento residencial',area:'',hour:'',hours:'',margin:30,desc:'',status:'Nova proposta',p1:0,p2:0,p3:0,base:0,createdAt:new Date().toLocaleDateString('pt-BR')});
+  orcClients.push({id:id,name:name.trim(),type:defaultType,area:defaultArea,hour:'',hours:'',margin:30,desc:'',status:'Nova proposta',p1:0,p2:0,p3:0,base:0,createdAt:new Date().toLocaleDateString('pt-BR')});
   orcOpenClient(id);
 }
 
@@ -7079,6 +7424,8 @@ function renderCodes(){
 // ============================================================
 const PAGE_META={
   home:{t:'Dashboard',s:'Bem-vindo à IARQ'},
+  clientes:{t:'Clientes',s:'Jornada por cliente'},
+  'cliente-detalhe':{t:'Detalhe do Cliente',s:'Jornada do projeto'},
   briefing:{t:'Briefing Inteligente',s:'Módulo 01 · Grátis (1 uso)'},
   report:{t:'Relatório do Cliente',s:'Gerado pela IARQ'},
   cfo:{t:'CFO Virtual',s:'Módulo 02 · Diagnóstico grátis'},
@@ -7110,13 +7457,20 @@ function go(id){
   if(tbTitle) tbTitle.textContent = officeName || 'IARQ';
   if(tbSub) tbSub.textContent = m.t;
   if(id==='briefing'){ document.getElementById('brief-list-view').style.display='block'; document.getElementById('brief-chat-view').style.display='none'; briefRenderList(); }
-  if(id==='home') dashInit();
-  if(id==='cfo') initCFO();
-  if(id==='comunidade') initCom();
+  if(id==='home'){ dashInit(); var niHome=document.getElementById('ni-home'); if(niHome)niHome.classList.add('on'); }
+  if(id==='clientes'){ clienteRenderLista(); var niCl=document.getElementById('ni-clientes'); if(niCl)niCl.classList.add('on'); }
+  if(id==='cliente-detalhe'){ var niCl=document.getElementById('ni-clientes'); if(niCl)niCl.classList.add('on'); }
+  if(id==='cfo'){ initCFO(); var niCfo=document.getElementById('ni-cfo'); if(niCfo)niCfo.classList.add('on'); }
+  if(id==='cmo'){ initCom && initCom(); var niCmo=document.getElementById('ni-cmo'); if(niCmo)niCmo.classList.add('on'); }
+  if(id==='briefing'){ var niBr=document.getElementById('ni-briefing'); if(niBr)niBr.classList.add('on'); }
+  if(id==='orcamento'){ var niOrc=document.getElementById('ni-orc'); if(niOrc)niOrc.classList.add('on'); }
+  if(id==='honorarios'){ var niHon=document.getElementById('ni-honorarios'); if(niHon)niHon.classList.add('on'); }
+  if(id==='comunidade'){ initCom(); var niCom=document.getElementById('ni-com'); if(niCom)niCom.classList.add('on'); }
   if(id==='admin') initAdm();
   if(id==='upgrade') upgradeInitView();
   if(id==='suporte')initSup();
   if(id==='acesso')renderCodes();
+  if(id==='home') dashLoadMeta();
   closeSidebar();window.scrollTo(0,0);
 }
 
@@ -7137,12 +7491,37 @@ function dashInit(){
   dashRenderBriefs();
   dashInitCal();
   dashRenderNotes();
+  dashLoadMeta();
   if(!dashNewsCache[dashNewsMode]) dashRefreshNews();
   else dashRenderNews(dashNewsCache[dashNewsMode]);
   if(!document.getElementById('dash-cfo-tip').textContent.trim() || document.getElementById('dash-cfo-tip').textContent.includes('Carregando'))
     dashLoadCFOTip();
   if(!document.getElementById('dash-cmo-tip').textContent.trim() || document.getElementById('dash-cmo-tip').textContent.includes('Carregando'))
     dashLoadCMOTip();
+}
+
+function dashLoadMeta(){
+  var perfil = JSON.parse(localStorage.getItem('iarq_cfo_perfil') || '{}');
+  var gastos = parseFloat(perfil.gastos) || 0;
+  var fat = parseFloat(perfil.fat) || 0;
+  var meta = gastos > 0 ? gastos * 1.3 : (fat > 0 ? fat : 0);
+  var card = document.getElementById('dash-meta-card');
+  if(!meta){ if(card) card.style.display='none'; return; }
+  if(card) card.style.display='flex';
+  var atual = fat;
+  var pct = Math.min(Math.round((atual/meta)*100), 100);
+  var el1 = document.getElementById('dash-meta-atual');
+  var el2 = document.getElementById('dash-meta-total');
+  var el3 = document.getElementById('dash-meta-bar');
+  var el4 = document.getElementById('dash-meta-frase');
+  if(el1) el1.textContent = 'R$ '+atual.toLocaleString('pt-BR');
+  if(el2) el2.textContent = 'R$ '+meta.toLocaleString('pt-BR');
+  if(el3){ el3.style.width=pct+'%'; el3.style.background = pct>=80?'var(--green)':(pct>=50?'var(--orange)':'var(--red)'); }
+  if(el4){
+    if(pct>=100) el4.textContent='✓ Meta batida este mês!';
+    else if(pct>=80) el4.textContent='Quase lá — faltam R$'+Math.round(meta-atual).toLocaleString('pt-BR');
+    else el4.textContent='Faltam R$'+Math.round(meta-atual).toLocaleString('pt-BR')+' para bater a meta';
+  }
 }
 
 // ── STATS DO DASH ───────────────────────────────────────────
@@ -7524,6 +7903,225 @@ function setQA(ch,opts){
 }
 
 // ============================================================
+// JORNADA POR CLIENTE
+// ============================================================
+
+var ETAPAS_JORNADA = [
+  {
+    id: 'conexao',
+    nome: 'Conexão',
+    icone: '◎',
+    cor: '#bf5af2',
+    desc: 'Reunião de conexão — entender o cliente e qualificar',
+    acao: 'Iniciar reunião de conexão',
+    modulo: 'reun'
+  },
+  {
+    id: 'proposta',
+    nome: 'Proposta',
+    icone: '◇',
+    cor: '#ff9f0a',
+    desc: 'Calcular honorários e gerar proposta cinematográfica',
+    acao: 'Criar proposta',
+    modulo: 'orcamento'
+  },
+  {
+    id: 'briefing',
+    nome: 'Briefing',
+    icone: '⬡',
+    cor: '#bf5af2',
+    desc: 'Briefing técnico completo do projeto',
+    acao: 'Iniciar briefing técnico',
+    modulo: 'briefing'
+  },
+  {
+    id: 'projeto',
+    nome: 'Projeto',
+    icone: '◈',
+    cor: '#30d158',
+    desc: 'Projeto em desenvolvimento',
+    acao: 'Acompanhar projeto',
+    modulo: null
+  }
+];
+
+var clientesData = JSON.parse(localStorage.getItem('iarq_clientes') || '[]');
+var clienteAtualId = null;
+
+function clienteSalvar(){
+  localStorage.setItem('iarq_clientes', JSON.stringify(clientesData));
+  clienteAtualizarContador();
+}
+
+function clienteAtualizarContador(){
+  var el = document.getElementById('sb-client-count');
+  if(el) el.textContent = clientesData.length;
+}
+
+function clienteNovo(){
+  var el = document.getElementById('cliente-novo-nome');
+  if(el) el.value = '';
+  var el2 = document.getElementById('cliente-novo-tipo');
+  if(el2) el2.value = '';
+  var el3 = document.getElementById('cliente-novo-area');
+  if(el3) el3.value = '';
+  var modal = document.getElementById('cliente-modal');
+  if(modal){ modal.style.display='flex'; setTimeout(function(){ if(el) el.focus(); },100); }
+}
+
+function clienteFecharModal(){
+  var modal = document.getElementById('cliente-modal');
+  if(modal) modal.style.display='none';
+}
+
+function clienteConfirmar(){
+  var nome = (document.getElementById('cliente-novo-nome')||{}).value || '';
+  if(!nome){ toast('Digite o nome do cliente'); return; }
+  var tipo = (document.getElementById('cliente-novo-tipo')||{}).value || '';
+  var area = (document.getElementById('cliente-novo-area')||{}).value || '';
+  var tipoLabel = {interiores:'Design de Interiores',arquitetura:'Projeto Arquitetônico',reforma:'Reforma',comercial:'Projeto Comercial',paisagismo:'Paisagismo'}[tipo] || 'Tipo não definido';
+  var cliente = {
+    id: 'cl_' + Date.now(),
+    nome: nome,
+    tipo: tipo,
+    tipoLabel: tipoLabel,
+    area: area,
+    etapaAtual: 0,
+    etapas: [{id:'conexao',status:'em_andamento',data:new Date().toLocaleDateString('pt-BR'),notas:''}],
+    criadoEm: new Date().toLocaleDateString('pt-BR'),
+    ultimaAcao: 'Cliente criado'
+  };
+  clientesData.unshift(cliente);
+  clienteSalvar();
+  clienteFecharModal();
+  clienteAbrirDetalhe(cliente.id);
+  toast('Jornada de '+nome+' criada ✦');
+}
+
+function clienteRenderLista(){
+  var lista = document.getElementById('clientes-lista');
+  var empty = document.getElementById('clientes-empty');
+  if(!lista) return;
+  if(!clientesData.length){
+    lista.innerHTML='';
+    if(empty) empty.style.display='block';
+    return;
+  }
+  if(empty) empty.style.display='none';
+  lista.innerHTML = clientesData.map(function(c){
+    var etapaAtual = ETAPAS_JORNADA[c.etapaAtual] || ETAPAS_JORNADA[0];
+    var timeline = ETAPAS_JORNADA.map(function(e, i){
+      var status = i < c.etapaAtual ? 'done' : (i === c.etapaAtual ? 'active' : 'pending');
+      var bg = status==='done' ? e.cor : (status==='active' ? e.cor+'33' : 'var(--w06)');
+      var border = status==='done' ? e.cor : (status==='active' ? e.cor : 'var(--br)');
+      var color = status==='done' || status==='active' ? e.cor : 'var(--w40)';
+      return '<div style="display:flex;flex-direction:column;align-items:center;gap:4px;flex:1">'
+        + '<div style="width:28px;height:28px;border-radius:50%;background:'+bg+';border:1.5px solid '+border+';display:flex;align-items:center;justify-content:center;font-size:11px;color:'+color+'">'+(status==='done'?'✓':e.icone)+'</div>'
+        + '<div style="font-size:9px;color:'+(status==='pending'?'var(--w40)':e.cor)+';font-weight:'+(status==='active'?'700':'400')+'">'+e.nome+'</div>'
+        + '</div>'
+        + (i < ETAPAS_JORNADA.length-1 ? '<div style="flex:1;height:1.5px;background:'+(i < c.etapaAtual?etapaAtual.cor:'var(--br)')+';margin-top:13px;opacity:.4"></div>' : '');
+    }).join('');
+    return '<div onclick="clienteAbrirDetalhe(\''+c.id+'\')" style="background:var(--g);border:.5px solid var(--br);border-radius:var(--r);padding:20px;margin-bottom:10px;cursor:pointer;transition:all .25s" onmouseover="this.style.borderColor=\'rgba(10,132,255,.3)\';this.style.background=\'rgba(10,132,255,.03)\'" onmouseout="this.style.borderColor=\'var(--br)\';this.style.background=\'var(--g)\'">'
+      + '<div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:16px;gap:12px">'
+      + '<div><div style="font-size:15px;font-weight:700;color:var(--w90);letter-spacing:-.3px">'+c.nome+'</div>'
+      + '<div style="font-size:11px;color:var(--w40);margin-top:3px">'+c.tipoLabel+(c.area?' · '+c.area+' m²':'')+'</div></div>'
+      + '<div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px">'
+      + '<div style="font-size:10px;font-weight:700;color:'+etapaAtual.cor+';background:'+etapaAtual.cor+'18;border:.5px solid '+etapaAtual.cor+'35;border-radius:980px;padding:3px 10px;white-space:nowrap">'+etapaAtual.nome+'</div>'
+      + '<div style="font-size:10px;color:var(--w40)">'+c.criadoEm+'</div>'
+      + '</div></div>'
+      + '<div style="display:flex;align-items:center;gap:0">'+timeline+'</div>'
+      + '</div>';
+  }).join('');
+}
+
+function clienteAbrirDetalhe(id){
+  var c = clientesData.find(function(x){return x.id===id;});
+  if(!c) return;
+  clienteAtualId = id;
+  document.getElementById('detalhe-nome').textContent = c.nome;
+  document.getElementById('detalhe-tipo').textContent = c.tipoLabel + (c.area?' · '+c.area+' m²':'');
+  var etapaAtual = ETAPAS_JORNADA[c.etapaAtual] || ETAPAS_JORNADA[0];
+  // Badge status
+  var badge = document.getElementById('detalhe-status-badge');
+  if(badge){
+    badge.textContent = etapaAtual.nome;
+    badge.style.color = etapaAtual.cor;
+    badge.style.background = etapaAtual.cor+'18';
+    badge.style.borderColor = etapaAtual.cor+'40';
+  }
+  // Timeline
+  var tl = document.getElementById('detalhe-timeline');
+  if(tl){
+    tl.innerHTML = ETAPAS_JORNADA.map(function(e,i){
+      var status = i < c.etapaAtual ? 'done' : (i===c.etapaAtual?'active':'pending');
+      return '<div style="display:flex;flex-direction:column;align-items:center;gap:8px;flex:1;min-width:80px">'
+        + '<div style="width:40px;height:40px;border-radius:50%;background:'+(status==='done'?e.cor:(status==='active'?e.cor+'22':'var(--w04)'))+';border:1.5px solid '+(status==='pending'?'var(--br)':e.cor)+';display:flex;align-items:center;justify-content:center;font-size:15px;color:'+(status==='pending'?'var(--w40)':e.cor)+'">'+( status==='done'?'✓':e.icone)+'</div>'
+        + '<div style="font-size:11px;font-weight:'+(status==='active'?'700':'400')+';color:'+(status==='pending'?'var(--w40)':e.cor)+';text-align:center">'+e.nome+'</div>'
+        + '<div style="font-size:10px;color:var(--w40);text-align:center;font-weight:300">'+e.desc.substring(0,30)+'...</div>'
+        + (status==='done'?'<div style="font-size:9px;color:var(--green)">✓ Concluído</div>':(status==='active'?'<div style="font-size:9px;color:'+e.cor+';font-weight:700">← Agora</div>':''))
+        + '</div>'
+        + (i<ETAPAS_JORNADA.length-1?'<div style="flex:1;height:1px;background:'+(i<c.etapaAtual?e.cor:'var(--br)')+';margin-top:20px;min-width:20px;opacity:.4"></div>':'');
+    }).join('');
+  }
+  // Próxima ação
+  var acaoEl = document.getElementById('detalhe-proxima-acao');
+  var btnEl = document.getElementById('detalhe-btn-acao');
+  if(acaoEl) acaoEl.textContent = etapaAtual.acao;
+  if(btnEl){
+    btnEl.textContent = etapaAtual.nome === 'Projeto' ? 'Em andamento ✓' : 'Iniciar '+etapaAtual.nome+' →';
+    btnEl.onclick = function(){ clienteIniciarEtapa(id, etapaAtual); };
+    btnEl.style.background = etapaAtual.cor.includes('#') ? etapaAtual.cor : 'var(--blue)';
+  }
+  // Histórico
+  var hist = document.getElementById('detalhe-historico');
+  if(hist){
+    if(!c.etapas || !c.etapas.length){
+      hist.innerHTML = '<div style="font-size:12px;color:var(--w40)">Nenhuma ação registrada ainda.</div>';
+    } else {
+      hist.innerHTML = c.etapas.map(function(e){
+        var etapaInfo = ETAPAS_JORNADA.find(function(x){return x.id===e.id;}) || {};
+        return '<div style="display:flex;align-items:flex-start;gap:12px;padding:12px;background:var(--w04);border-radius:var(--r2)">'
+          + '<div style="width:28px;height:28px;border-radius:50%;background:'+(etapaInfo.cor||'var(--blue)')+'22;border:.5px solid '+(etapaInfo.cor||'var(--blue)')+';display:flex;align-items:center;justify-content:center;font-size:12px;color:'+(etapaInfo.cor||'var(--blue)')+';flex-shrink:0">'+(etapaInfo.icone||'◎')+'</div>'
+          + '<div style="flex:1"><div style="font-size:12px;font-weight:600;color:var(--w90)">'+(etapaInfo.nome||e.id)+'</div>'
+          + '<div style="font-size:11px;color:var(--w40);margin-top:2px">'+e.data+'</div>'
+          + (e.notas?'<div style="font-size:11px;color:var(--w60);margin-top:4px;font-weight:300">'+e.notas+'</div>':'')+'</div>'
+          + '<div style="font-size:10px;font-weight:600;color:'+(e.status==='concluido'?'var(--green)':'var(--orange)')+'">'+(e.status==='concluido'?'✓ Feito':'Em andamento')+'</div>'
+          + '</div>';
+      }).join('');
+    }
+  }
+  go('cliente-detalhe');
+}
+
+function clienteIniciarEtapa(id, etapa){
+  var c = clientesData.find(function(x){return x.id===id;});
+  if(!c) return;
+  localStorage.setItem('iarq_cliente_contexto', JSON.stringify({
+    id: c.id, nome: c.nome, tipo: c.tipo, tipoLabel: c.tipoLabel, area: c.area
+  }));
+  if(etapa.modulo){
+    go(etapa.modulo);
+    toast('Abrindo '+etapa.nome+' para '+c.nome+' ✦');
+  }
+}
+
+function clienteAvancarEtapa(id){
+  var c = clientesData.find(function(x){return x.id===id;});
+  if(!c) return;
+  if(c.etapaAtual < ETAPAS_JORNADA.length-1){
+    var etapaAtualData = c.etapas[c.etapas.length-1];
+    if(etapaAtualData) etapaAtualData.status = 'concluido';
+    c.etapaAtual++;
+    var proxEtapa = ETAPAS_JORNADA[c.etapaAtual];
+    c.etapas.push({id:proxEtapa.id, status:'em_andamento', data:new Date().toLocaleDateString('pt-BR'), notas:''});
+    c.ultimaAcao = proxEtapa.nome + ' iniciado';
+    clienteSalvar();
+    clienteAbrirDetalhe(id);
+    toast('Avançou para '+proxEtapa.nome+' ✦');
+  }
+}
+
+// ============================================================
 // UTILS
 // ============================================================
 function ar(el){el.style.height='auto';el.style.height=Math.min(el.scrollHeight,110)+'px';}
@@ -7538,7 +8136,9 @@ window.addEventListener('DOMContentLoaded',function(){
   try{ initLoader(); }catch(e){}
   try{ setupLinks(); }catch(e){}
   try{ updStats(); }catch(e){}
-  try{ go('home'); }catch(e){}
+  try{ go('clientes'); }catch(e){}
+  try{ clienteAtualizarContador(); }catch(e){}
+  try{ clienteRenderLista(); }catch(e){}
   try{ initAuthCanvas(); }catch(e){}
   try{ initAuthTagline(); }catch(e){}
   try{ sbInit(); }catch(e){}
@@ -8762,6 +9362,244 @@ function obChooseColor(color, el){
   if(inputArea) inputArea.innerHTML = obBuildInput(OB.steps[OB.step]);
 }
 
+// ── FEATURE 1: CALCULADORA DE HONORÁRIOS ─────────────────
+function calcHonorarios() {
+  var area = parseFloat(document.getElementById('hon-area').value) || 0;
+  var tipo = document.getElementById('hon-tipo').value;
+  var complex = document.getElementById('hon-complex').value;
+  var vlhora = parseFloat(document.getElementById('hon-vlhora').value) || 150;
+
+  var multComplex = {simples: 0.8, medio: 1.0, complexo: 1.3, luxo: 1.6};
+  var multTipo = {residencial: 1.0, comercial: 1.1, corporativo: 1.2, paisagismo: 0.9};
+
+  var horasBase = area * 1.2 * (multComplex[complex] || 1) * (multTipo[tipo] || 1);
+  document.getElementById('hon-horas').value = Math.round(horasBase);
+
+  var horas = parseFloat(document.getElementById('hon-horas').value) || horasBase;
+  var vlMin = horas * vlhora;
+  var vlIdeal = vlMin * 1.2;
+  var vlPremium = vlMin * 1.4;
+
+  var fmt = function(v){ return 'R$ ' + v.toLocaleString('pt-BR', {minimumFractionDigits:0, maximumFractionDigits:0}); };
+
+  document.getElementById('hon-result').style.display = 'block';
+  document.getElementById('hon-vl-min').textContent = fmt(vlMin);
+  document.getElementById('hon-vl-ideal').textContent = fmt(vlIdeal);
+  document.getElementById('hon-vl-premium').textContent = fmt(vlPremium);
+
+  var tipoLabel = {residencial:'residencial', comercial:'comercial', corporativo:'corporativo', paisagismo:'de paisagismo'}[tipo] || tipo;
+  var complexLabel = {simples:'padrão', medio:'médio', complexo:'alta complexidade', luxo:'alto padrão/luxo'}[complex] || complex;
+
+  var justificativa = 'Este honorário de ' + fmt(vlIdeal) + ' reflete ' + Math.round(horas) + ' horas de trabalho dedicado ao seu projeto ' + tipoLabel + ' de ' + area + ' m², com nível ' + complexLabel + '. Inclui todo o desenvolvimento criativo, técnico e acompanhamento necessários para entregar um resultado que supere suas expectativas. Investir em projeto profissional evita retrabalho, desperdício de material e garante a valorização do seu imóvel.';
+
+  document.getElementById('hon-justif').textContent = justificativa;
+}
+
+function honCopiarJustif() {
+  var txt = document.getElementById('hon-justif').textContent;
+  navigator.clipboard.writeText(txt).then(function(){ toast('Justificativa copiada! ✦'); });
+}
+
+function honCopiarWA() {
+  var area = document.getElementById('hon-area').value;
+  var vl = document.getElementById('hon-vl-ideal').textContent;
+  var txt = document.getElementById('hon-justif').textContent;
+  var msg = '📐 *Proposta de Honorários*\n\nÁrea: ' + area + ' m²\nValor sugerido: *' + vl + '*\n\n' + txt;
+  navigator.clipboard.writeText(msg).then(function(){ toast('Mensagem copiada para WhatsApp! ✦'); });
+}
+
+// ── FEATURE 2: MODO VISITA ────────────────────────────────
+var VISITA_AMBIENTES = [
+  'Sala de estar','Sala de jantar','Cozinha','Lavabo','Banheiro social',
+  'Suíte master','Suítes','Área de serviço','Varanda','Área externa','Garagem','Escritório'
+];
+
+function visitaInit() {
+  var cont = document.getElementById('vis-ambientes');
+  if (!cont || cont.innerHTML.trim() !== '') return;
+  cont.innerHTML = VISITA_AMBIENTES.map(function(amb, i) {
+    var id = 'vamb-' + i;
+    return '<div style="border-bottom:.5px solid var(--br);padding-bottom:10px">'
+      + '<label style="display:flex;align-items:center;gap:10px;cursor:pointer">'
+      + '<input type="checkbox" id="' + id + '-chk" onchange="visitaToggleObs(' + i + ')" style="width:16px;height:16px;accent-color:var(--blue);cursor:pointer">'
+      + '<span style="font-size:13px;font-weight:500">' + amb + '</span>'
+      + '</label>'
+      + '<div id="' + id + '-obs" style="display:none;margin-top:8px;margin-left:26px">'
+      + '<input class="form-input" type="text" id="' + id + '-txt" placeholder="Observações sobre ' + amb.toLowerCase() + '..." style="font-size:12px">'
+      + '</div>'
+      + '</div>';
+  }).join('');
+}
+
+function visitaToggleObs(i) {
+  var chk = document.getElementById('vamb-' + i + '-chk');
+  var obs = document.getElementById('vamb-' + i + '-obs');
+  if (obs) obs.style.display = chk.checked ? 'block' : 'none';
+}
+
+function visitaAddFotos(input) {
+  var prev = document.getElementById('vis-fotos-preview');
+  if (!prev) return;
+  Array.from(input.files).forEach(function(file) {
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      var img = document.createElement('img');
+      img.src = e.target.result;
+      img.style.cssText = 'width:72px;height:72px;object-fit:cover;border-radius:8px;border:.5px solid var(--br)';
+      prev.appendChild(img);
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+function visitaGerarRelatorio() {
+  var nome = document.getElementById('vis-nome').value || 'Imóvel sem nome';
+  var end = document.getElementById('vis-end').value || '—';
+  var tipo = document.getElementById('vis-tipo');
+  var tipoLabel = tipo ? tipo.options[tipo.selectedIndex].text : 'Visita';
+  var obs = document.getElementById('vis-obs').value || '';
+  var data = new Date().toLocaleDateString('pt-BR', {day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'});
+
+  var ambMarcados = [];
+  VISITA_AMBIENTES.forEach(function(amb, i) {
+    var chk = document.getElementById('vamb-' + i + '-chk');
+    if (chk && chk.checked) {
+      var txt = document.getElementById('vamb-' + i + '-txt');
+      var nota = txt && txt.value ? ' — ' + txt.value : '';
+      ambMarcados.push('  ✓ ' + amb + nota);
+    }
+  });
+
+  var relatorio = '📋 RELATÓRIO DE VISITA\n'
+    + '─────────────────────────────\n'
+    + 'Imóvel: ' + nome + '\n'
+    + 'Endereço: ' + end + '\n'
+    + 'Tipo: ' + tipoLabel + '\n'
+    + 'Data: ' + data + '\n\n'
+    + 'AMBIENTES VISTORIADOS:\n'
+    + (ambMarcados.length > 0 ? ambMarcados.join('\n') : '  Nenhum ambiente marcado') + '\n\n'
+    + (obs ? 'OBSERVAÇÕES GERAIS:\n' + obs + '\n\n' : '')
+    + 'PRÓXIMOS PASSOS SUGERIDOS:\n'
+    + '  → Consolidar medidas e levantar necessidades\n'
+    + '  → Apresentar conceito inicial ao cliente\n'
+    + '  → Alinhar cronograma e proposta comercial\n\n'
+    + '— Gerado por IARQ ✦';
+
+  document.getElementById('vis-relatorio').textContent = relatorio;
+  document.getElementById('vis-result').style.display = 'block';
+  window.scrollTo({top: document.getElementById('vis-result').offsetTop - 20, behavior: 'smooth'});
+}
+
+function visitaCopiar() {
+  var txt = document.getElementById('vis-relatorio').textContent;
+  navigator.clipboard.writeText(txt).then(function(){ toast('Relatório copiado! ✦'); });
+}
+
+function visitaCopiarWA() {
+  var txt = document.getElementById('vis-relatorio').textContent;
+  navigator.clipboard.writeText(txt).then(function(){ toast('Relatório copiado para WhatsApp! ✦'); });
+}
+
+// ── FEATURE 3: FOLLOW-UP ORÇAMENTO ───────────────────────
+function orcFollowUp(clientName) {
+  var msg = clientName + ', tudo bem? Passando para saber se você teve a oportunidade de avaliar a proposta que enviei. Fico à disposição para qualquer dúvida ou ajuste — quero muito fazer parte desse projeto! 🏠\n\nQualquer dúvida é só me chamar aqui.';
+  document.getElementById('followup-msg').value = msg;
+  document.getElementById('followup-modal').style.display = 'flex';
+}
+
+function followupCopyWA() {
+  var msg = document.getElementById('followup-msg').value;
+  navigator.clipboard.writeText(msg).then(function(){ toast('Mensagem copiada! ✦'); });
+}
+
+function followupClose() {
+  document.getElementById('followup-modal').style.display = 'none';
+}
+
+// ── FEATURE 4: BRIEFING EXPORT WHATSAPP ──────────────────
+// ── CTA: ir do briefing para orçamento ───────────────────────
+function briefIrOrcamento(){
+  var c = briefClients.find(function(x){return x.id===briefCurrentId;});
+  go('orcamento');
+  if(c && c.name){
+    setTimeout(function(){
+      toast('Briefing de '+c.name+' carregado ✦');
+    }, 400);
+  }
+}
+
+// ── Atualiza painel de resumo em tempo real ───────────────────
+function briefUpdateSummary(userText){
+  var txt = userText.toLowerCase();
+  var show = function(id, val){
+    var el = document.getElementById('brief-sum-'+id);
+    var valEl = document.getElementById('brief-sum-'+id+'-val');
+    if(el && valEl){ el.style.display='block'; valEl.textContent=val; }
+    var empty = document.getElementById('brief-sum-empty');
+    if(empty) empty.style.display='none';
+  };
+  // Tipo de projeto
+  if(txt.includes('arquitet')||txt.includes('🏛')) show('tipo','🏛 Arquitetônico');
+  else if(txt.includes('interior')||txt.includes('🛋')) show('tipo','🛋 Interiores');
+  else if(txt.includes('reform')) show('tipo','🔨 Reforma');
+  else if(txt.includes('comerci')) show('tipo','🏢 Comercial');
+  // Área
+  var areaM = userText.match(/(\d+)\s*m/i);
+  if(areaM) show('area', areaM[1]+' m²');
+  // Estilo
+  if(txt.includes('modern')) show('estilo','Moderno');
+  else if(txt.includes('classic')||txt.includes('clássi')) show('estilo','Clássico');
+  else if(txt.includes('minim')) show('estilo','Minimalista');
+  else if(txt.includes('industr')) show('estilo','Industrial');
+  else if(txt.includes('escandinav')) show('estilo','Escandinavo');
+  else if(txt.includes('contempor')) show('estilo','Contemporâneo');
+  else if(txt.includes('rustic')) show('estilo','Rústico');
+  // Budget
+  var budgetM = userText.match(/r\$\s*([\d.,]+)/i);
+  if(budgetM) show('budget','R$ '+budgetM[1]);
+  else if(txt.includes('sem limit')||txt.includes('sem orçamento')) show('budget','Sem limite definido');
+  // Prazo
+  if(txt.includes('urgent')||txt.includes('1 mês')||txt.includes('imediato')) show('prazo','Urgente');
+  else if(txt.includes('3 mes')||txt.includes('trimest')) show('prazo','3 meses');
+  else if(txt.includes('6 mes')||txt.includes('semestr')) show('prazo','6 meses');
+  else if(txt.includes('1 ano')||txt.includes('anual')) show('prazo','1 ano');
+}
+
+function briefExportWA() {
+  var nome = document.getElementById('r-client').textContent;
+  var conteudo = document.getElementById('r-ai-full').textContent;
+  var msg = '📋 *Relatório de Briefing — ' + nome + '*\n\n' + conteudo.substring(0, 1000) + (conteudo.length > 1000 ? '...' : '');
+  navigator.clipboard.writeText(msg).then(function(){ toast('Relatório copiado para WhatsApp! ✦'); });
+}
+
+// ── FEATURE 5: MERCADO PAGO ───────────────────────────────
+var MP_LINKS = {
+  avista: 'https://www.mercadopago.com.br/checkout/v1/redirect?pref_id=SEU_PREFERENCE_ID_AVISTA',
+  parcelado: 'https://www.mercadopago.com.br/checkout/v1/redirect?pref_id=SEU_PREFERENCE_ID_PARCELADO'
+};
+
+function abrirMP(tipo) {
+  var link = localStorage.getItem('iarq_mp_' + tipo) || MP_LINKS[tipo];
+  window.open(link, '_blank');
+}
+
+function setMPLink(tipo, url) {
+  localStorage.setItem('iarq_mp_' + tipo, url);
+  toast('Link Mercado Pago salvo! ✦');
+}
+
+// ── INIT MODO VISITA ──────────────────────────────────────
+(function() {
+  var origGo = typeof go === 'function' ? go : null;
+  if (origGo) {
+    var _go = go;
+    go = function(page) {
+      _go(page);
+      if (page === 'visita') { setTimeout(visitaInit, 100); }
+    };
+  }
+})();
+
 </script>
 <!-- ═══════════════════════════════════════════════════════
      ONBOARDING GUIADO COM IA
@@ -8802,6 +9640,18 @@ function obChooseColor(color, el){
         <button id="ob-next-btn" onclick="obNext()" style="flex:1;padding:14px;border-radius:10px;border:none;background:#0066cc;color:#fff;font-size:14px;font-weight:600;font-family:inherit;cursor:pointer;transition:all .2s;box-shadow:0 4px 20px rgba(0,102,204,.35)">Continuar →</button>
       </div>
 
+    </div>
+  </div>
+</div>
+
+<div id="followup-modal" style="display:none;position:fixed;inset:0;z-index:4000;background:rgba(0,0,0,.8);backdrop-filter:blur(20px);align-items:center;justify-content:center;padding:20px">
+  <div style="width:100%;max-width:440px;background:#111;border:.5px solid rgba(255,255,255,.1);border-radius:20px;padding:24px">
+    <div style="font-size:16px;font-weight:700;margin-bottom:6px">💬 Follow-up sugerido</div>
+    <div style="font-size:12px;color:rgba(255,255,255,.4);margin-bottom:16px">Edite à vontade antes de enviar</div>
+    <textarea id="followup-msg" style="width:100%;background:rgba(255,255,255,.06);border:.5px solid rgba(255,255,255,.1);border-radius:12px;padding:14px;font-size:13px;color:#fff;font-family:inherit;line-height:1.6;resize:none;height:140px;outline:none"></textarea>
+    <div style="display:flex;gap:8px;margin-top:12px">
+      <button onclick="followupCopyWA()" style="flex:1;background:#25d366;color:#fff;border:none;border-radius:980px;padding:11px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit">📱 Copiar para WhatsApp</button>
+      <button onclick="followupClose()" style="background:rgba(255,255,255,.08);color:rgba(255,255,255,.6);border:none;border-radius:980px;padding:11px 16px;font-size:13px;cursor:pointer;font-family:inherit">Fechar</button>
     </div>
   </div>
 </div>
